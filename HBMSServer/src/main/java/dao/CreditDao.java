@@ -1,27 +1,20 @@
 package dao;
 
+import message.ResultMessage;
+import po.CreditRecordPO;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-
+import java.util.Map;
 
 
 public interface CreditDao extends Remote{
-	public void showCredit() throws RemoteException;
-	
-	public void showCreditRecord() throws RemoteException;
-	
-	public boolean addCredit(int creditValue) throws RemoteException;
-	
-	public boolean resumeCredit(int credit) throws RemoteException;
-	
-	public int getCreditValue(String id) throws RemoteException;
-	
-	public int setCreditValue(String id, int value) throws RemoteException;
-	
-	public String getChangeType(String id) throws RemoteException;
-	
-	public String getReasonType(String id) throws RemoteException;
-	
-	public String getAccount(String id) throws RemoteException;
+	public long getCreditValue(int userID) throws RemoteException,Exception;
+
+	public ResultMessage setCreditValue(int userID,long value) throws RemoteException,Exception;
+
+	public Map<Integer, CreditRecordPO> getCreditRecordList(int userID) throws  RemoteException;
+
+	public ResultMessage addCreditRecord(CreditRecordPO po) throws RemoteException;
 
 }	

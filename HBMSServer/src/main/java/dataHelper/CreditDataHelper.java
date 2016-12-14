@@ -1,10 +1,13 @@
 package dataHelper;
 
+import message.ResultMessage;
+import po.CreditRecordPO;
+
 import java.util.Map;
 
 public interface CreditDataHelper {
 	
-	public Map<Integer, Object> getCreditData();
+	public Map<Integer,CreditRecordPO> getCreditRecordList(int userID);
 	
-	public void updateCreditData(Map<Integer, Object> map);
+	public ResultMessage addCreditRecord(CreditRecordPO po);
 }

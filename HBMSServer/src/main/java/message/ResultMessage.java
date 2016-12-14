@@ -7,5 +7,6 @@ public enum ResultMessage {
     failure,
     success,
 	notexist,
-	disconnection;
+	disconnection,
+    wrongPassword;
 }

@@ -42,8 +42,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public UserPO getUserData(int id) throws RemoteException {
+    public UserPO getUserData(int id) throws RemoteException,Exception {
         return userDataHelper.getUserData(id);
+    }
+
+    public UserPO getUserData(String accountName) throws RemoteException,Exception{
+        return userDataHelper.getUserData(accountName);
     }
 
     @Override
@@ -62,34 +66,21 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public ResultMessage login(int id, String pwd) throws RemoteException {
-        userPO=userDataHelper.getUserData(id);
+    public ResultMessage login(String accountName, String pwd) throws RemoteException,Exception {
+        userPO=userDataHelper.getUserData(accountName);
         if(userPO!=null&&pwd.equals(userPO.getPassword())){
             return ResultMessage.success;
         }else{
-            userPO=null;
-            return ResultMessage.failure;
+            if(userPO!=null){
+                return ResultMessage.wrongPassword;
+            }else{
+                return ResultMessage.notexist;
+            }
         }
     }
 
     @Override
     public ResultMessage signup(UserPO po) throws RemoteException,Exception{
-        String accountName=po.getAccountName();
-        String sentence="select * from user where accountName='"+accountName+"'";
-        PreparedStatement preparedStatement;
-        try{
-            preparedStatement = connection.prepareStatement(sentence);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.getString("userID")!=null){
-                //a user with a same accountName already exists
-                return ResultMessage.failure;
-            }else{
-                userDataHelper.addUser(po);
-            }
-        }catch(SQLException e){
-            e.printStackTrace();
-            return ResultMessage.failure;
-        }
-        return ResultMessage.success;
+        return userDataHelper.addUser(po);
     }
 }

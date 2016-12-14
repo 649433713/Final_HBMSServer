@@ -7,41 +7,23 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import dao.CreditDao;
-import dao.HotelDao;
-import dao.OrderDao;
-import dao.PromotionDao;
-import dao.RoomDao;
-import dao.UserDao;
-import daoImpl.CreditDaoImpl;
-import daoImpl.HotelDaoImpl;
-import daoImpl.OrderDaoImpl;
-import daoImpl.PromotionDaoImpl;
-import daoImpl.RoomDaoImpl;
-import daoImpl.UserDaoImpl;
+import dao.*;
+import daoImpl.*;
 import message.OrderStateMessage;
 import message.ResultMessage;
 import message.RoomStateMessage;
 import model.HotelFilter;
+import model.PromotionFilter;
 import model.UserType;
-import po.AppealPO;
-import po.CommentInfoPO;
-import po.HotelPO;
-import po.OrderPO;
-import po.PromotionPO;
-import po.RegionPO;
-import po.RoomInfoPO;
-import po.UserPO;
+import po.*;
 
-/**
- * @author 凡
- *
- */
-public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, UserDao,  OrderDao, RoomDao,PromotionDao {
+public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, UserDao,  OrderDao, RoomDao ,CreditDao, PromotionDao {
+	private static final long serialVersionUID = -4024589936788353523L;
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8161659370903805031L;
+
 	/**
 	 * 
 	 */
@@ -52,7 +34,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	private OrderDao orderDao;
 	private RoomDao roomDao;
 	private PromotionDao promotionDao;
-	
+
 	protected DataRemoteObject() throws RemoteException {
 		super();
 		hotelDao = new HotelDaoImpl();
@@ -60,7 +42,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 		creditDao = new CreditDaoImpl();
 		orderDao = new OrderDaoImpl();
 		roomDao = new RoomDaoImpl();
-		promotionDao = new PromotionDaoImpl();
+		promotionDao=new PromotionDaoImpl();
 		
 	}
 
@@ -236,10 +218,35 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public UserPO getUserData(int id) throws RemoteException {
+	public ResultMessage addAppealOrder(AppealPO appealPO) throws RemoteException {
+
+		return orderDao.addAppealOrder(appealPO);
+	}
+
+	@Override
+	public AppealPO getAppealOrder(int orderID) throws RemoteException {
+
+		return orderDao.getAppealOrder(orderID);
+	}
+
+	@Override
+	public ResultMessage modifyAppealOrder(AppealPO appealPO) throws RemoteException {
+
+		return orderDao.modifyAppealOrder(appealPO);
+	}
+
+	@Override
+	public UserPO getUserData(int id) throws RemoteException,Exception {
 		
 		
 		return userDao.getUserData(id);
+	}
+
+	@Override
+	public UserPO getUserData(String accountName) throws RemoteException ,Exception{
+
+
+		return userDao.getUserData(accountName);
 	}
 
 	@Override
@@ -264,10 +271,10 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public ResultMessage login(int id, String pwd) throws RemoteException {
+	public ResultMessage login(String accountName, String pwd) throws RemoteException,Exception {
 		
 		
-		return userDao.login(id, pwd);
+		return userDao.login(accountName,pwd);
 	}
 
 	@Override
@@ -278,62 +285,47 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public ResultMessage addAppealOrder(AppealPO appealPO) throws RemoteException {
-		
-		
-		return orderDao.addAppealOrder(appealPO);
+	public long getCreditValue(int userID) throws RemoteException, Exception {
+		return creditDao.getCreditValue(userID);
 	}
 
 	@Override
-	public AppealPO getAppealOrder(int orderID) throws RemoteException {
-		
-		
-		return orderDao.getAppealOrder(orderID);
+	public ResultMessage setCreditValue(int userID, long value) throws RemoteException, Exception {
+		return creditDao.setCreditValue(userID,value);
 	}
 
 	@Override
-	public ResultMessage modifyAppealOrder(AppealPO appealPO) throws RemoteException {
-		
-		
-		return orderDao.modifyAppealOrder(appealPO);
+	public Map<Integer, CreditRecordPO> getCreditRecordList(int userID) throws RemoteException {
+		return creditDao.getCreditRecordList(userID);
 	}
 
 	@Override
-	public PromotionPO showPromotion() {
-		
-		
-		return promotionDao.showPromotion();
+	public ResultMessage addCreditRecord(CreditRecordPO po) throws RemoteException {
+		return creditDao.addCreditRecord(po);
 	}
 
 	@Override
-	public List<PromotionPO> showPromotionList() {
-		
-		
-		return promotionDao.showPromotionList();
+	public Map<Integer, PromotionPO> getHotelPromotionList(PromotionFilter promotionFilter) throws Exception {
+		return promotionDao.getHotelPromotionList(promotionFilter);
 	}
 
 	@Override
-	public ResultMessage addPromotion(PromotionPO po) {
-		
-		
+	public Map<Integer, PromotionPO> getWebPromotionList(PromotionFilter promotionFilter) throws Exception {
+		return promotionDao.getWebPromotionList(promotionFilter);
+	}
+
+	@Override
+	public ResultMessage addPromotion(PromotionPO po) throws Exception {
 		return promotionDao.addPromotion(po);
 	}
 
 	@Override
-	public ResultMessage modifyPromotion(PromotionPO po) {
-		
-		
-		return promotionDao.modifyPromotion(po);
-	}
-
-	@Override
-	public ResultMessage deletePromotion(String id) {
-		
-		
+	public ResultMessage deletePromotion(int id) throws Exception {
 		return promotionDao.deletePromotion(id);
 	}
 
-
-	
-
+	@Override
+	public ResultMessage updatePromotion(PromotionPO po) throws Exception {
+		return promotionDao.updatePromotion(po);
+	}
 }

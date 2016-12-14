@@ -13,4 +13,8 @@ public interface DataFactory {
 	public RoomDataHelper getRoomDataHelper() ;
 	
 	public OrderDataHelper getOrderDataHelper();
+
+	public CreditDataHelper getCreditDataHelper();
+
+	public PromotionDataHelper getPromotionDataHelper();
 }

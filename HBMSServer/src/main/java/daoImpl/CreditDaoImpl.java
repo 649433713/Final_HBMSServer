@@ -1,73 +1,69 @@
 package daoImpl;
 
 import java.rmi.RemoteException;
+import java.util.Map;
 
 import dao.CreditDao;
+import dao.UserDao;
+import dataHelper.CreditDataHelper;
+import dataHelper.DataFactory;
+import dataHelperImpl.DataFactoryImpl;
+import message.ResultMessage;
+import po.CreditRecordPO;
+import po.UserPO;
 
 public class CreditDaoImpl implements CreditDao{
-	
+
+	private Map<Integer,CreditRecordPO> map;
+
 	private static CreditDaoImpl creditDaoImpl;
-	
-	public static CreditDaoImpl getInstance() {
-		// TODO 自动生成的构造函数存根
-		if(creditDaoImpl==null){
-			creditDaoImpl=new CreditDaoImpl();
+
+	private DataFactory dataFactory;
+
+	private CreditDataHelper creditDataHelper;
+
+
+
+	public CreditDaoImpl() {
+		if(map==null){
+			dataFactory=new DataFactoryImpl();
+			creditDataHelper=dataFactory.getCreditDataHelper();
+		}
+	}
+
+	public static CreditDaoImpl getInstance(){
+		if(creditDaoImpl == null){
+			creditDaoImpl = new CreditDaoImpl();
 		}
 		return creditDaoImpl;
 	}
-	
+
 	@Override
-	public void showCredit() throws RemoteException {
-		// TODO 自动生成的方法存根
-		
+	public long getCreditValue(int userID) throws RemoteException,Exception {
+		long creditValue;
+		UserDao userDao=new UserDaoImpl();
+		UserPO userPO=userDao.getUserData(userID);
+		creditValue=userPO.getCreditValue();
+		return creditValue;
 	}
 
 	@Override
-	public void showCreditRecord() throws RemoteException {
-		// TODO 自动生成的方法存根
-		
+	public ResultMessage setCreditValue(int userID, long value) throws RemoteException,Exception{
+		UserDao userDao=new UserDaoImpl();
+		UserPO userPO=userDao.getUserData(userID);
+		userPO.setCreditValue(value);
+		ResultMessage message=userDao.modifyUser(userPO);
+		return message;
 	}
 
 	@Override
-	public boolean addCredit(int creditValue) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return false;
+	public Map<Integer, CreditRecordPO> getCreditRecordList(int userID) throws RemoteException {
+		map=creditDataHelper.getCreditRecordList(userID);
+		return map;
 	}
 
 	@Override
-	public boolean resumeCredit(int credit) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return false;
+	public ResultMessage addCreditRecord(CreditRecordPO po) throws RemoteException {
+		return creditDataHelper.addCreditRecord(po);
 	}
-
-	@Override
-	public int getCreditValue(String id) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return 0;
-	}
-
-	@Override
-	public int setCreditValue(String id, int value) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return 0;
-	}
-
-	@Override
-	public String getChangeType(String id) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
-	@Override
-	public String getReasonType(String id) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
-	@Override
-	public String getAccount(String id) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
 }

@@ -13,10 +13,11 @@ import java.util.Map;
 public class HotelFilter implements Serializable{
 
 
+	private static final long serialVersionUID = 4258843928411453500L;
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4258843928411453500L;
+
 	public List<Map<String, Object>> filter = new ArrayList<>();
 	
 	/**

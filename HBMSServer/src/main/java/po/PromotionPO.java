@@ -1,4 +1,7 @@
 package po;
+import model.DiscountType;
+import model.PromotionType;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -6,68 +9,53 @@ import java.util.List;
  * Created by alex on 16-11-17.
  */
 public class PromotionPO implements Serializable{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7228605699611384344L;
-	//shared
-    String id;
+
+
+    private static final long serialVersionUID = -5502676819446211197L;
+    int promotionID;
+    PromotionType promotionType;
+    int region;
     String name;
-    String type;
     String content;
     Date startDate;
     Date endDate;
-    List<Integer> rankAvailable;
-    //for hotel promotion
-    List<String> regionAvailable;
-    //for web promotion
+    int minRankAvailable;
+    int maxRankAvailable;
+    DiscountType type;
+    int requirement;
+    int discount;
 
 
-    //constructors for all PromotionPO
-    public PromotionPO(String id){
-        this.id=id;
+
+    public PromotionPO(int promotionID, PromotionType promotionType, int region, String name, String content, Date startDate, Date endDate, int minRankAvailable, int maxRankAvailable, DiscountType type, int condition, int discount) {
+        this.promotionID = promotionID;
+        this.promotionType = promotionType;
+        this.region = region;
+        this.name = name;
+        this.content = content;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.minRankAvailable = minRankAvailable;
+        this.maxRankAvailable = maxRankAvailable;
+        this.type = type;
+        this.requirement = condition;
+        this.discount = discount;
     }
 
-    //constructors for hotel promotions
-    public PromotionPO(String id,String hotelPromotionName,String type,String content,
-                       Date startDate,Date endDate,List<Integer> ranks){
-        this.id=id;
-        this.name=hotelPromotionName;
-        this.type=type;
-        this.content=content;
-        this.startDate=startDate;
-        this.endDate=endDate;
-        this.rankAvailable=ranks;
+    public int getPromotionID() {
+        return promotionID;
     }
 
-    public PromotionPO(String hotelName,String content){
-        this.name=hotelName;
-        this.content=content;
+    public PromotionType getPromotionType() {
+        return promotionType;
     }
 
-    //constructors for web promotions
-    public PromotionPO(String id,String webPromotionName,String type,String content,
-                       Date startDate,Date endDate,List<Integer> ranks,List<String> regionAvailable){
-        this.id=id;
-        this.name=webPromotionName;
-        this.type=type;
-        this.content=content;
-        this.startDate=startDate;
-        this.endDate=endDate;
-        this.rankAvailable=ranks;
-        this.regionAvailable=regionAvailable;
-    }
-
-    public String getId() {
-        return id;
+    public int getRegion() {
+        return region;
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getType() {
-        return type;
     }
 
     public String getContent() {
@@ -82,11 +70,23 @@ public class PromotionPO implements Serializable{
         return endDate;
     }
 
-    public List<Integer> getRankAvailable() {
-        return rankAvailable;
+    public int getMinRankAvailable() {
+        return minRankAvailable;
     }
 
-    public List<String> getRegionAvailable() {
-        return regionAvailable;
+    public int getMaxRankAvailable() {
+        return maxRankAvailable;
+    }
+
+    public DiscountType getType() {
+        return type;
+    }
+
+    public int getRequirement() {
+        return requirement;
+    }
+
+    public int getDiscount() {
+        return discount;
     }
 }
