@@ -10,11 +10,13 @@ import java.util.Map;
 import dao.CreditDao;
 import dao.HotelDao;
 import dao.OrderDao;
+import dao.PromotionDao;
 import dao.RoomDao;
 import dao.UserDao;
 import daoImpl.CreditDaoImpl;
 import daoImpl.HotelDaoImpl;
 import daoImpl.OrderDaoImpl;
+import daoImpl.PromotionDaoImpl;
 import daoImpl.RoomDaoImpl;
 import daoImpl.UserDaoImpl;
 import message.OrderStateMessage;
@@ -26,6 +28,7 @@ import po.AppealPO;
 import po.CommentInfoPO;
 import po.HotelPO;
 import po.OrderPO;
+import po.PromotionPO;
 import po.RegionPO;
 import po.RoomInfoPO;
 import po.UserPO;
@@ -34,7 +37,7 @@ import po.UserPO;
  * @author 凡
  *
  */
-public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, UserDao,  OrderDao, RoomDao {
+public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, UserDao,  OrderDao, RoomDao,PromotionDao {
 	/**
 	 * 
 	 */
@@ -48,15 +51,16 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	private CreditDao creditDao;
 	private OrderDao orderDao;
 	private RoomDao roomDao;
+	private PromotionDao promotionDao;
 	
 	protected DataRemoteObject() throws RemoteException {
 		super();
 		hotelDao = new HotelDaoImpl();
-//		userDao=new UserDaoImpl();
-//		creditDao = new CreditDaoImpl();
+		userDao=new UserDaoImpl();
+		creditDao = new CreditDaoImpl();
 		orderDao = new OrderDaoImpl();
 		roomDao = new RoomDaoImpl();
-		 
+		promotionDao = new PromotionDaoImpl();
 		
 	}
 
@@ -293,6 +297,42 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 		
 		return orderDao.modifyAppealOrder(appealPO);
 	}
+
+	@Override
+	public PromotionPO showPromotion() {
+		
+		
+		return promotionDao.showPromotion();
+	}
+
+	@Override
+	public List<PromotionPO> showPromotionList() {
+		
+		
+		return promotionDao.showPromotionList();
+	}
+
+	@Override
+	public ResultMessage addPromotion(PromotionPO po) {
+		
+		
+		return promotionDao.addPromotion(po);
+	}
+
+	@Override
+	public ResultMessage modifyPromotion(PromotionPO po) {
+		
+		
+		return promotionDao.modifyPromotion(po);
+	}
+
+	@Override
+	public ResultMessage deletePromotion(String id) {
+		
+		
+		return promotionDao.deletePromotion(id);
+	}
+
 
 	
 

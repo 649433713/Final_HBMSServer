@@ -6,7 +6,11 @@ import java.util.List;
  * Created by alex on 16-11-17.
  */
 public class PromotionPO implements Serializable{
-    //shared
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7228605699611384344L;
+	//shared
     String id;
     String name;
     String type;

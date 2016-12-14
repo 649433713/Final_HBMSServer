@@ -3,6 +3,10 @@ package po;
 import java.io.Serializable;
 
 public class MemberInfoPO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3470462343795713374L;
 	String memberType;
 	String memberInfo;
 	int rank;

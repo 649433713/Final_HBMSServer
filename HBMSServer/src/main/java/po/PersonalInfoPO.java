@@ -4,6 +4,10 @@ import java.awt.Image;
 import java.io.Serializable;
 
 public class PersonalInfoPO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9077021943555031873L;
 	String name;
 	String contactInfo;
 	Image portrait;

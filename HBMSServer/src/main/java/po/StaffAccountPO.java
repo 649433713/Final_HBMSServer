@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 public class StaffAccountPO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2579117850331361482L;
 	String name;
 	String password;
 	List<UserPO> staffList;
