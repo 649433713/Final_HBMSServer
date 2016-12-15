@@ -102,8 +102,8 @@ public class test_Alex_User {
         statement.execute("ALTER TABLE hbmsdatabase.user AUTO_INCREMENT = 1");
         //deleteUser(2);
         //addUser();
-        //getUser(1);
-        //getUser(3);
+        getUser(1);
+        getUser(3);
         //getUser("alex2097");
         //getUser("alex2098");
         //modifyUser();

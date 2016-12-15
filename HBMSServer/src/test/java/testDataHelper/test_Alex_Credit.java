@@ -65,8 +65,8 @@ public class test_Alex_Credit {
         Connection connection= DBUtil_Alex.getConnection();
         Statement statement=connection.createStatement();
         statement.execute("ALTER TABLE hbmsdatabase.creditrecord AUTO_INCREMENT = 8");
-        //getCreditRecordList(1);
-        //getCreditRecordList(2);
+        getCreditRecordList(1);
+        getCreditRecordList(2);
         //addCreditRecord();
         //getCreditValue();
         //setCreditValue();

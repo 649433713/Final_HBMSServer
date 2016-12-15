@@ -19,7 +19,7 @@ public class DBUtil_Alex {
     private static Connection connection = null;
     static{
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection= DriverManager.getConnection(URL,NAME, PASSWORD);
         } catch (ClassNotFoundException | SQLException e) {
             // TODO Auto-generated catch block
