@@ -125,12 +125,6 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 		return hotelDao.addComment(commentInfoPO);
 	}
 
-	@Override
-	public Map<Integer, RegionPO> getRegions() throws RemoteException {
-		
-		return hotelDao.getRegions();
-	}
-
 
 	@Override
 	public ResultMessage modifyRoomState(int roomInfoID, RoomStateMessage room_state)
@@ -224,9 +218,9 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public AppealPO getAppealOrder(int orderID) throws RemoteException {
+	public Map<Integer, AppealPO> getAppealOrderList(int userID) throws RemoteException {
 
-		return orderDao.getAppealOrder(orderID);
+		return orderDao.getAppealOrderList(userID);
 	}
 
 	@Override
@@ -327,5 +321,26 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	@Override
 	public ResultMessage updatePromotion(PromotionPO po) throws Exception {
 		return promotionDao.updatePromotion(po);
+	}
+
+	@Override
+	public List<String> getProvinces() throws RemoteException {
+		
+		
+		return hotelDao.getProvinces();
+	}
+
+	@Override
+	public List<String> getCities(String province) throws RemoteException {
+		
+		
+		return hotelDao.getCities(province);
+	}
+
+	@Override
+	public Map<Integer, RegionPO> getRegions(String city) throws RemoteException {
+		
+		
+		return hotelDao.getRegions(city);
 	}
 }

@@ -35,5 +35,9 @@ public interface HotelDao extends Remote{
 
 	public ResultMessage addComment(CommentInfoPO commentInfoPO)throws RemoteException;
 
-	public Map<Integer, RegionPO> getRegions()throws RemoteException;
+	public List<String> getProvinces()throws RemoteException;
+	
+	public List<String> getCities(String province)throws RemoteException;
+	
+	public Map<Integer, RegionPO> getRegions(String city)throws RemoteException;
 }

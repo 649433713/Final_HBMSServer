@@ -1,7 +1,6 @@
 package po;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 
 import message.OrderStateMessage;
@@ -120,19 +119,19 @@ public class OrderPO implements Serializable{
 		this.executeDDl = executeDDl;
 	}
 
-	public Date getChechinTime() {
+	public Date getCheckinTime() {
 		return checkinTime;
 	}
 
-	public void setChechinTime(Date checkinTime) {
+	public void setCheckinTime(Date checkinTime) {
 		this.checkinTime = checkinTime;
 	}
 
-	public Date getChechoutTime() {
+	public Date getCheckoutTime() {
 		return checkoutTime;
 	}
 
-	public void setChechoutTime(Date checkoutTime) {
+	public void setCheckoutTime(Date checkoutTime) {
 		this.checkoutTime = checkoutTime;
 	}
 

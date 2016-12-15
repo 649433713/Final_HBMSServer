@@ -109,17 +109,18 @@ public class OrderDaoImpl implements OrderDao
 		
 		return orderDataHelper.addAppealOrder(appealPO);
 	}
-	@Override
-	public AppealPO getAppealOrder(int orderID) throws RemoteException {
-		
-		
-		return orderDataHelper.getAppealOrder(orderID);
-	}
+
 	@Override
 	public ResultMessage modifyAppealOrder(AppealPO appealPO) throws RemoteException {
 		
 		
 		return orderDataHelper.modifyAppealOrder(appealPO);
+	}
+	@Override
+	public Map<Integer, AppealPO> getAppealOrderList(int userID) throws RemoteException {
+		
+		
+		return orderDataHelper.getAppealOrderList(userID);
 	}
 
 

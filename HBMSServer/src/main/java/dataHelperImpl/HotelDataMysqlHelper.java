@@ -249,17 +249,17 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 			CommentInfoPO commentInfoPO = null;
 			while (resultSet.next()) {
 	
-				Image image1 = null,image2 = null,image3 = null;
+				File image1 = null,image2 = null,image3 = null;
 				if (resultSet.getString("picture1") != null) {
-					image1 = new ImageIcon(resultSet.getString("picture1")).getImage();
+					image1 = new File(resultSet.getString("picture1"));
 	
 				}
 				if (resultSet.getString("picture2") != null) {
-					image2 = new ImageIcon(resultSet.getString("picture2")).getImage();
+					image2 = new File(resultSet.getString("picture2"));
 					
 				}
 				if (resultSet.getString("picture3") != null) {
-					image3 = new ImageIcon(resultSet.getString("picture3")).getImage();
+					image3 = new File(resultSet.getString("picture3"));
 				}
 
 				commentInfoPO = new CommentInfoPO(resultSet.getInt("commentID"), 
@@ -314,10 +314,59 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 	
 	}
 
+
 	@Override
-	public Map<Integer, RegionPO> getRegions() {
+	public List<String> getProvinces() {
 		
-		String sql = "select * from region";
+		String sql = "select province from region group by province";
+
+		ArrayList<String> list = new ArrayList<>();
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+	
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				list.add(resultSet.getString(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+
+		return list;
+	}
+
+	@Override
+	public List<String> getCities(String province) {
+		String sql = "select city from region where province = '"+province+"' group by city";
+
+		ArrayList<String> list = new ArrayList<>();
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+	
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				list.add(resultSet.getString(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+
+		return list;
+
+	}
+
+	@Override
+	public Map<Integer, RegionPO> getRegions(String city) {
+		
+		String sql = "select * from region where city = '"+city+"'";
 
 		Map<Integer, RegionPO> map = new LinkedHashMap<>();
 		PreparedStatement preparedStatement;
@@ -342,7 +391,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 		}
 
 		return map;
-		
+
 	}
 
 }

@@ -28,7 +28,11 @@ public interface HotelDataHelper {
 
 	public ResultMessage addComment(CommentInfoPO commentInfoPO);
 
-	public Map<Integer, RegionPO> getRegions();
+	public List<String> getProvinces();
+	
+	public List<String> getCities(String province);
+	
+	public Map<Integer, RegionPO> getRegions(String city);
 	
 	//��Ϊ��ѯ����Ƶ���Ϣ֮ǰ  ���в�ѯ�Ƶ��б�
 }
