@@ -1,12 +1,12 @@
-package dataHelperImpl;
+/*package dataHelperImpl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
+*//**
  * Created by alex on 12/4/16.
- */
+ *//*
 public class DBUtil_Alex {
     //just for test
     //just for test
@@ -32,3 +32,4 @@ public class DBUtil_Alex {
     }
     
 }
+*/

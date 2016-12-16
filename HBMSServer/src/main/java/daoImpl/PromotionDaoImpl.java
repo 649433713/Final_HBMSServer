@@ -5,7 +5,7 @@ import java.util.Map;
 import dao.PromotionDao;
 import dataHelper.DataFactory;
 import dataHelper.PromotionDataHelper;
-import dataHelperImpl.DBUtil_Alex;
+import dataHelperImpl.DBUtil;
 import dataHelperImpl.DataFactoryImpl;
 import message.ResultMessage;
 import model.PromotionFilter;
@@ -23,7 +23,7 @@ public class PromotionDaoImpl implements PromotionDao{
 		if(promotionPO==null){
 			dataFactory=new DataFactoryImpl();
 			promotionDataHelper=dataFactory.getPromotionDataHelper();
-			connection= DBUtil_Alex.getConnection();
+			connection= DBUtil.getConnection();
 		}
 	}
 

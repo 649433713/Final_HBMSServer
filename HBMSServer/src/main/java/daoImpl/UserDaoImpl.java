@@ -1,21 +1,14 @@
 package daoImpl;
 import dataHelper.DataFactory;
 import dataHelper.UserDataHelper;
-import dataHelperImpl.DBUtil_Alex;
+import dataHelperImpl.DBUtil;
 import dataHelperImpl.DataFactoryImpl;
 import dao.UserDao;
 import message.ResultMessage;
-import model.UserType;
-import model.UserTypeHelper;
 import po.UserPO;
 
 import java.rmi.RemoteException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Map;
 /**
  * Created by alex on 16-11-9.
  */
@@ -30,7 +23,7 @@ public class UserDaoImpl implements UserDao {
         if(userPO==null){
             dataFactory=new DataFactoryImpl();
             userDataHelper=dataFactory.getUserDataHelper();
-            connection= DBUtil_Alex.getConnection();
+            connection= DBUtil.getConnection();
         }
     }
 
