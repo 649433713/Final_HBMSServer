@@ -2,7 +2,7 @@ package testDataHelper;
 
 import dao.UserDao;
 import daoImpl.UserDaoImpl;
-import dataHelperImpl.DBUtil_Alex;
+import dataHelperImpl.DBUtil;
 import message.ResultMessage;
 import model.MemberType;
 import model.UserType;
@@ -97,11 +97,11 @@ public class test_Alex_User {
     }
 
     public static void main(String args[]) throws Exception{
-        Connection connection= DBUtil_Alex.getConnection();
+        Connection connection= DBUtil.getConnection();
         Statement statement=connection.createStatement();
         statement.execute("ALTER TABLE hbmsdatabase.user AUTO_INCREMENT = 1");
-        //deleteUser(2);
-        //addUser();
+        deleteUser(2);
+        addUser();
         //getUser(1);
         //getUser(3);
         //getUser("alex2097");

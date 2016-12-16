@@ -2,7 +2,7 @@ package testDataHelper;
 
 import dao.CreditDao;
 import daoImpl.CreditDaoImpl;
-import dataHelperImpl.DBUtil_Alex;
+import dataHelperImpl.DBUtil;
 import model.CreditRecordReasonTypeHelper;
 import po.CreditRecordPO;
 
@@ -62,13 +62,13 @@ public class test_Alex_Credit {
     }
 
     public static void main(String args[])throws Exception{
-        Connection connection= DBUtil_Alex.getConnection();
+        Connection connection= DBUtil.getConnection();
         Statement statement=connection.createStatement();
         statement.execute("ALTER TABLE hbmsdatabase.creditrecord AUTO_INCREMENT = 8");
         //getCreditRecordList(1);
         //getCreditRecordList(2);
         //addCreditRecord();
-        //getCreditValue();
+        getCreditValue();
         //setCreditValue();
     }
 }

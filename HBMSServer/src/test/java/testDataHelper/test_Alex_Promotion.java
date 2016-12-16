@@ -2,7 +2,7 @@ package testDataHelper;
 
 import dao.PromotionDao;
 import daoImpl.PromotionDaoImpl;
-import dataHelperImpl.DBUtil_Alex;
+import dataHelperImpl.DBUtil;
 import model.DiscountTypeHelper;
 import model.PromotionFilter;
 import model.PromotionType;
@@ -21,7 +21,7 @@ import java.util.Set;
 public class test_Alex_Promotion {
 
     static void reestablishment()throws Exception{
-        Connection connection= DBUtil_Alex.getConnection();
+        Connection connection= DBUtil.getConnection();
         Statement statement=connection.createStatement();
         ///*
         statement.execute("DELETE FROM hbmsdatabase.promotion");
@@ -117,6 +117,6 @@ public class test_Alex_Promotion {
         //addPromotion(po2);
         //deletePromotion(2);
         //updatePromotion();
-        getPromotionList();
+        //getPromotionList();
     }
 }
