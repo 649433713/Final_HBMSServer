@@ -84,10 +84,24 @@ public class HotelDaoImpl implements HotelDao{
 		
 		return hotelDataHelper.addComment(commentInfoPO);
 	}
+
 	@Override
-	public Map<Integer, RegionPO> getRegions() throws RemoteException {
+	public List<String> getProvinces() throws RemoteException {
 		
-		return hotelDataHelper.getRegions();
+		
+		return hotelDataHelper.getProvinces();
+	}
+	@Override
+	public List<String> getCities(String province) throws RemoteException {
+		
+		
+		return hotelDataHelper.getCities(province);
+	}
+	@Override
+	public Map<Integer, RegionPO> getRegions(String city) throws RemoteException {
+		
+		
+		return hotelDataHelper.getRegions(city);
 	}
 
 }

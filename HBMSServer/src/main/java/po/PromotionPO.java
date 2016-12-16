@@ -4,7 +4,6 @@ import model.PromotionType;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 /**
  * Created by alex on 16-11-17.
  */

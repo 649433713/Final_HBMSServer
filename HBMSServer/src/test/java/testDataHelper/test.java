@@ -23,7 +23,6 @@ import po.RoomInfoPO;
 public class test {
 
 	public static void main(String[] args) throws ParseException, InterruptedException {
-		HotelDataMysqlHelper hotelDataMysqlHelper = new HotelDataMysqlHelper();
 		HotelDao hotelDao = new HotelDaoImpl();
 		RoomDao roomDao = new RoomDaoImpl();
 		OrderDao orderDao = new OrderDaoImpl();

@@ -17,7 +17,7 @@ import java.sql.*;
 public class UserDataMysqlHelper implements UserDataHelper {
     Connection connection;
     public UserDataMysqlHelper(){
-        connection=DBUtil_Alex.getConnection();
+        connection=DBUtil.getConnection();
     }
 
     @Override

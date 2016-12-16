@@ -13,7 +13,7 @@ public class CreditDataMysqlHelper implements CreditDataHelper{
 	Connection connection;
 
 	public CreditDataMysqlHelper() {
-		connection=DBUtil_Alex.getConnection();
+		connection=DBUtil.getConnection();
 	}
 
 

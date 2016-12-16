@@ -21,7 +21,7 @@ public interface OrderDataHelper {
 
 	public ResultMessage addAppealOrder(AppealPO appealPO);
 
-	public AppealPO getAppealOrder(int orderID);
-
 	public ResultMessage modifyAppealOrder(AppealPO appealPO);
+
+	public Map<Integer, AppealPO> getAppealOrderList(int userID);
 }

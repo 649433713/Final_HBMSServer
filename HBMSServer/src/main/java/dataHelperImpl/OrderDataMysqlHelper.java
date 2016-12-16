@@ -48,6 +48,9 @@ public class OrderDataMysqlHelper implements OrderDataHelper {
 
 		if (orderState!=null) {
 			sql.append(" and orderState ="+orderState.ordinal());
+			if (orderState == OrderStateMessage.Abnormal) {
+				sql.append(" or orderState = 4");
+			}
 		}
 		switch (orderState) {
 		case Unexecuted:
@@ -175,27 +178,7 @@ public class OrderDataMysqlHelper implements OrderDataHelper {
 		}
 		return ResultMessage.success;
 	}
-	@Override
-	public AppealPO getAppealOrder(int orderID) {
-		
-		AppealPO appealPO = null;
-		String sql = "select * from appeal where orderID = ?";
-		PreparedStatement preparedStatement;
-		try {
-			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, orderID);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			if (resultSet.next()) {
-				appealPO = new AppealPO(resultSet.getInt("appealID"), resultSet.getInt("orderID"), 
-						resultSet.getInt("userID"), resultSet.getInt("webMarketerID"),resultSet.getDate("appealTime"), 
-						resultSet.getString("content"), AppealStateMessage.values()[resultSet.getInt("appealState")]);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return appealPO;
-	}
+	
 	@Override
 	public ResultMessage modifyAppealOrder(AppealPO appealPO) {
 	
@@ -215,6 +198,34 @@ public class OrderDataMysqlHelper implements OrderDataHelper {
 			return ResultMessage.failure;
 		}
 		return ResultMessage.success;
+	}
+	@Override
+	public Map<Integer, AppealPO> getAppealOrderList(int userID) {
+		
+		AppealPO appealPO = null;
+		StringBuffer sql = new StringBuffer("select * from appeal");
+		if (userID!=0) {
+			sql.append(" where userID = ?");
+		}
+		sql.append(" order by appealTime desc");
+		Map<Integer, AppealPO> map = new LinkedHashMap<>();
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection.prepareStatement(sql.toString());
+			preparedStatement.setInt(1, userID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				appealPO = new AppealPO(resultSet.getInt("appealID"), resultSet.getInt("orderID"), 
+						resultSet.getInt("userID"), resultSet.getInt("webMarketerID"),resultSet.getDate("appealTime"), 
+						resultSet.getString("content"), AppealStateMessage.values()[resultSet.getInt("appealState")]);
+			
+				map.put(appealPO.getAppealID(), appealPO);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return map;
 	}
 
 

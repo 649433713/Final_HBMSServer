@@ -52,7 +52,7 @@ public interface OrderDao extends Remote{
 		public ResultMessage addAppealOrder(AppealPO appealPO)throws RemoteException;
 		
 		//网站营销人员处理异常订单
-		public AppealPO getAppealOrder(int orderID)throws RemoteException;
+		public Map<Integer, AppealPO> getAppealOrderList(int userID)throws RemoteException;
 		
 		public ResultMessage modifyAppealOrder(AppealPO appealPO)throws RemoteException;
 }

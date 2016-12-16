@@ -16,7 +16,7 @@ public class PromotionDataMysqlHelper implements PromotionDataHelper{
 	Connection connection;
 
 	public PromotionDataMysqlHelper(){
-		connection=DBUtil_Alex.getConnection();
+		connection=DBUtil.getConnection();
 	}
 
 	@Override
