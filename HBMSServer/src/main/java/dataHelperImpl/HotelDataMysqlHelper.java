@@ -16,6 +16,7 @@ import dataHelper.HotelDataHelper;
 import message.ResultMessage;
 import model.DateToDayOff;
 import model.HotelFilter;
+import model.ImageHelper;
 import po.CommentInfoPO;
 import po.HotelPO;
 import po.RegionPO;
@@ -26,9 +27,11 @@ import po.RegionPO;
  */
 public class HotelDataMysqlHelper implements HotelDataHelper {
 	Connection connection;
+	ImageHelper imageHelper;
 
 	public HotelDataMysqlHelper() {
 		connection = DBUtil.getConnection();
+		imageHelper = new ImageHelper();
 	}
 
 	@Override
@@ -110,7 +113,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 				hotelPO = new HotelPO(resultSet.getString("name"), resultSet.getInt("hotelID"),
 						resultSet.getInt("star"), resultSet.getString("address"), resultSet.getInt("region"),
 						resultSet.getString("introduction"), resultSet.getString("facility"), images,
-						resultSet.getDouble("score"),resultSet.getInt("lowestPrice"));
+						resultSet.getDouble("score"),resultSet.getInt("lowestPrice"),resultSet.getString("accountName"));
 
 	
 				map.put(hotelPO.getId(), hotelPO);
@@ -126,12 +129,8 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 	}
 
 	@Override
-	public ResultMessage addHotel(HotelPO hotelPO) {
-		
-		List<File> images = hotelPO.getEnvironment();
-		String imagePath1 = null;
-		String imagePath2 = null;
-		String imagePath3 = null;
+	public int addHotel(HotelPO hotelPO) {
+		int hotelID;
 		/*
 		 * 这个path我是不会存
 		 * 
@@ -139,8 +138,9 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 		String sql = ""+
 					" insert into hotel"+
 					" (name,address,region,introduction,"+
-					" star,environment1,environment2,environment3,facility,score)"+
-					" values(?,?,?,?,?,?,?,?,?,?)";
+					" star,facility,score,accountName)"+
+					" values(?,?,?,?,?,?,?,?)";
+		
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
@@ -149,35 +149,37 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 			preparedStatement.setInt(3, hotelPO.getRegion());
 			preparedStatement.setString(4, hotelPO.getIntroduction());
 			preparedStatement.setInt(5, hotelPO.getStar());
-			preparedStatement.setString(6, imagePath1);
-			preparedStatement.setString(7, imagePath2);
-			preparedStatement.setString(8, imagePath3);
-			preparedStatement.setString(9, hotelPO.getFacility());
-			preparedStatement.setDouble(10, hotelPO.getScore());
+			preparedStatement.setString(6, hotelPO.getFacility());
+			preparedStatement.setDouble(7, hotelPO.getScore());
+			preparedStatement.setString(8, hotelPO.getAccountName());
 			
 			preparedStatement.execute();
-		} catch (SQLException e) {
+			
+			preparedStatement = connection.prepareStatement("select max(hotelID) from hotel");
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				hotelID =resultSet.getInt(1);
+				imageHelper.makeHotelDir(hotelID);
+				return hotelID;
+		
+			}
+			else {
+				return 0;
+			}
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return ResultMessage.failure;
+			return 0;
 		}
-		return ResultMessage.success;
 	}
 
 	@Override
 	public ResultMessage updateHotel(HotelPO hotelPO) {
-		List<File> images = hotelPO.getEnvironment();
-		String imagePath1 = null;
-		String imagePath2 = null;
-		String imagePath3 = null;
-		/*
-		 * 这个path我是不会存
-		 * 
-		 */
+
 		String sql = ""+
 					" update hotel"+
-					" set name=?,address=?,region=?,introdution=?,"+
-					" star=?,environment1=?,environment2=?,environment3=?,facility=?,score=?"+
+					" set name=?,address=?,region=?,introduction=?,"+
+					" star=?,facility=?,score=?"+
 					" where hotelID=?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -186,13 +188,10 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 			preparedStatement.setInt(3, hotelPO.getRegion());
 			preparedStatement.setString(4, hotelPO.getIntroduction());
 			preparedStatement.setInt(5, hotelPO.getStar());
-			preparedStatement.setString(6, imagePath1);
-			preparedStatement.setString(7, imagePath2);
-			preparedStatement.setString(8, imagePath3);
-			preparedStatement.setString(9, hotelPO.getFacility());
-			preparedStatement.setDouble(10, hotelPO.getScore());
-			preparedStatement.setInt(11, hotelPO.getId());
-			
+			preparedStatement.setString(6, hotelPO.getFacility());
+			preparedStatement.setDouble(7, hotelPO.getScore());
+			preparedStatement.setInt(8, hotelPO.getId());
+			saveImage(hotelPO.getId(), hotelPO.getEnvironment());
 			preparedStatement.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -282,10 +281,27 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 
 	@Override
 	public ResultMessage addComment(CommentInfoPO commentInfoPO) {
-		
 		String imagePath1 = null;
 		String imagePath2 = null;
 		String imagePath3 = null;
+		try {
+			String path = imageHelper.getHotelDir(commentInfoPO.getHotelID()).getPath();
+			if (commentInfoPO.getPicture1()!=null) {
+				imagePath1 = path+"/"+commentInfoPO.getCommentID()+"comment1";
+				imageHelper.saveImage(commentInfoPO.getPicture1(), imagePath1);
+			}
+			if (commentInfoPO.getPicture2()!=null) {
+				imagePath1 = path+"/"+commentInfoPO.getCommentID()+"comment2";
+				imageHelper.saveImage(commentInfoPO.getPicture2(), imagePath2);
+			}
+			if (commentInfoPO.getPicture3()!=null) {
+				imagePath1 = path+"/"+commentInfoPO.getCommentID()+"comment3";
+				imageHelper.saveImage(commentInfoPO.getPicture2(), imagePath3);
+			}
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		/*
 		 * 这个path我是不会存
 		 * 
@@ -394,4 +410,50 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 
 	}
 
+	private ResultMessage saveImage(int hotelID,List<File> images){
+		ImageHelper imageHelper = new ImageHelper();
+		String path1 = null;
+		String path2 = null;
+		String path3 = null;
+		
+		try {
+			imageHelper.deldir(imageHelper.getHotelDir(hotelID));
+			imageHelper.makeHotelDir(hotelID);
+			if (images.get(0)!=null) {
+				path1= imageHelper.getHotelDir(hotelID).getPath()+"/picture1.jpg";
+				imageHelper.saveImage(images.get(0), path1);
+			}
+			if (images.get(1)!=null) {
+				path2= imageHelper.getHotelDir(hotelID).getPath()+"/picture2.jpg";	
+				imageHelper.saveImage(images.get(1), path2);
+			}
+			if (images.get(2)!=null) {
+				path3= imageHelper.getHotelDir(hotelID).getPath()+"/picture3.jpg";	
+				imageHelper.saveImage(images.get(2), path3);
+			}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		
+		
+		String sql = ""+
+				" update hotel"+
+				" set environment1=?,environment2=?,environment3=?"+
+				" where hotelID=?";
+		try {
+		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setString(1,path1);
+		preparedStatement.setString(2,path2);
+		preparedStatement.setString(3, path3);
+		preparedStatement.setInt(4, hotelID);		
+		preparedStatement.execute();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return ResultMessage.failure;
+	}
+	return ResultMessage.success;
+		
+	}
 }

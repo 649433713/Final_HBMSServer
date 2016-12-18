@@ -13,18 +13,29 @@ import java.io.IOException;
  */
 public class ImageHelper {
 
-    public String makedir(int userID)throws Exception{
-        File userFolder=getdir(userID);
+    public String makeUserDir(int userID)throws Exception{
+        File userFolder=getUserDir(userID);
         userFolder.mkdirs();
         return userFolder.getPath();
     }
 
-    public File getdir(int userID) throws Exception{
-        String rootPath=getProjectPath()+"/res/";
+    public File getUserDir(int userID) throws Exception{
+        String rootPath=getProjectPath()+"/res/user/";
         File userFolder=new File(rootPath+userID);
         return userFolder;
     }
 
+    public String makeHotelDir(int hotelID)throws Exception{
+        File hotelFolder=getHotelDir(hotelID);
+        hotelFolder.mkdirs();
+        return hotelFolder.getPath();
+    }
+
+    public File getHotelDir(int hotelID) throws Exception{
+        String rootPath=getProjectPath()+"/res/hotel/";
+        File hotelFolder=new File(rootPath+hotelID);
+        return hotelFolder;
+    }
     public void deldir(File file){
         if(file.exists()){
             if(file.isFile()){
