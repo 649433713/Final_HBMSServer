@@ -155,8 +155,8 @@ public class UserDataMysqlHelper implements UserDataHelper {
         String key="innovator";
         boolean isStaff=true;
         if(userPO.getHotelid()==0) isStaff=false;
-        String sql0="INSERT into user(userType,accountName,password,name,contact,creditValue,memberType,memberInfo,workID)" +
-                "VALUES (?,hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),?,?,?,?)";
+        String sql0="INSERT into user(userType,accountName,password,name,contact,creditValue,memberType,memberInfo,workID,rank)" +
+                "VALUES (?,hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),?,?,?,?,?)";
 
         String sql1="INSERT into user(userType,accountName,password,name,contact,creditValue,memberType,memberInfo,workID,hotelID)" +
                 "VALUES (?,hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),?,?,?,?,?)";
@@ -191,6 +191,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
                 preparedStatement.setInt(7,userPO.getMemberType().ordinal());
                 preparedStatement.setString(8,userPO.getMemberInfo());
                 preparedStatement.setString(9,userPO.getWorkid());
+                preparedStatement.setInt(10,userPO.getRank());
                 preparedStatement.execute();
             }catch(SQLException e){
                 e.printStackTrace();

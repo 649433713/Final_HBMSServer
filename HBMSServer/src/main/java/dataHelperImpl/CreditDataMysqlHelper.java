@@ -42,22 +42,42 @@ public class CreditDataMysqlHelper implements CreditDataHelper{
 
 	@Override
 	public ResultMessage addCreditRecord(CreditRecordPO po) {
-
+		boolean isPopup=false;
+		if(po.getOrderID()==0) isPopup=true;
 		String sql="INSERT into creditrecord(time,userID,reasonType,amount,orderID)" +
 				"VALUES (?,?,?,?,?)";
+
+		String sql1="INSERT into creditrecord(time,userID,reasonType,amount)" +
+				"VALUES (?,?,?,?)";
+
 		PreparedStatement preparedStatement;
-		try{
-			preparedStatement=connection.prepareStatement(sql);
-			preparedStatement.setTimestamp(1,this.getTimestamp(new Date(po.getTime().getTime())));
-			preparedStatement.setInt(2,po.getUserID());
-			preparedStatement.setInt(3,po.getReasonType().ordinal());
-			preparedStatement.setLong(4,po.getAmount());
-			preparedStatement.setInt(5,po.getOrderID());
-			preparedStatement.execute();
-		}catch(SQLException e){
-			e.printStackTrace();
-			return ResultMessage.failure;
+		if(isPopup){
+			try{
+				preparedStatement=connection.prepareStatement(sql1);
+				preparedStatement.setTimestamp(1,this.getTimestamp(new Date(po.getTime().getTime())));
+				preparedStatement.setInt(2,po.getUserID());
+				preparedStatement.setInt(3,po.getReasonType().ordinal());
+				preparedStatement.setLong(4,po.getAmount());
+				preparedStatement.execute();
+			}catch(SQLException e){
+				e.printStackTrace();
+				return ResultMessage.failure;
+			}
+		}else{
+			try{
+				preparedStatement=connection.prepareStatement(sql);
+				preparedStatement.setTimestamp(1,this.getTimestamp(new Date(po.getTime().getTime())));
+				preparedStatement.setInt(2,po.getUserID());
+				preparedStatement.setInt(3,po.getReasonType().ordinal());
+				preparedStatement.setLong(4,po.getAmount());
+				preparedStatement.setInt(5,po.getOrderID());
+				preparedStatement.execute();
+			}catch(SQLException e){
+				e.printStackTrace();
+				return ResultMessage.failure;
+			}
 		}
+
 		return ResultMessage.success;
 	}
 
