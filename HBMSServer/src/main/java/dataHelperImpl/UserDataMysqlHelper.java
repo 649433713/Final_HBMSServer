@@ -2,14 +2,13 @@ package dataHelperImpl;
 
 import dataHelper.UserDataHelper;
 import message.ResultMessage;
-import model.ImageHelper;
-import model.MemberTypeHelper;
-import model.UserType;
-import model.UserTypeHelper;
+import model.*;
 import po.UserPO;
 
 import java.io.File;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by alex on 12/4/16.
@@ -154,23 +153,52 @@ public class UserDataMysqlHelper implements UserDataHelper {
         Statement statement=connection.createStatement();
         PreparedStatement preparedStatement;
         String key="innovator";
-        String sql0="INSERT into user(userType,accountName,password,name,contact,creditValue,memberType,memberInfo,workID,hotelID)" +
-                "VALUES ("  +userPO.getUserType().ordinal()+
-                ","         +"hex(AES_ENCRYPT('"+userPO.getAccountName()+"','"+key+"'))"+
-                ","         +"hex(AES_ENCRYPT('"+userPO.getPassword()+"','"+key+"'))"+
-                ","         +"hex(AES_ENCRYPT('"+userPO.getName()+"','"+key+"'))"+
-                ","         +"hex(AES_ENCRYPT('"+userPO.getContact()+"','"+key+"'))"+
-                ","          +userPO.getCreditValue()+
-                ","          +userPO.getMemberType().ordinal()+
-                ",'"          +userPO.getMemberInfo()+
-                "',"          +userPO.getWorkid()+
-                ","          +userPO.getHotelid()+
-                ")";
-        try{
-            statement.execute(sql0);
-        }catch(SQLException e){
-            return ResultMessage.failure;
+        boolean isStaff=true;
+        if(userPO.getHotelid()==0) isStaff=false;
+        String sql0="INSERT into user(userType,accountName,password,name,contact,creditValue,memberType,memberInfo,workID)" +
+                "VALUES (?,hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),?,?,?,?)";
+
+        String sql1="INSERT into user(userType,accountName,password,name,contact,creditValue,memberType,memberInfo,workID,hotelID)" +
+                "VALUES (?,hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),?,?,?,?,?)";
+        if(isStaff){
+            try{
+                preparedStatement=connection.prepareStatement(sql1);
+                preparedStatement.setInt(1,userPO.getUserType().ordinal());
+                preparedStatement.setString(2,userPO.getAccountName());
+                preparedStatement.setString(3,userPO.getPassword());
+                preparedStatement.setString(4,userPO.getName());
+                preparedStatement.setString(5,userPO.getContact());
+                preparedStatement.setLong(6,userPO.getCreditValue());
+                preparedStatement.setInt(7,userPO.getMemberType().ordinal());
+                preparedStatement.setString(8,userPO.getMemberInfo());
+                preparedStatement.setString(9,userPO.getWorkid());
+                preparedStatement.setInt(10,userPO.getHotelid());
+                preparedStatement.execute();
+            }catch(SQLException e){
+                e.printStackTrace();
+                System.out.println("here is the fucking reason 1!!!");
+                return ResultMessage.failure;
+            }
+        }else{
+            try{
+                preparedStatement=connection.prepareStatement(sql0);
+                preparedStatement.setInt(1,userPO.getUserType().ordinal());
+                preparedStatement.setString(2,userPO.getAccountName());
+                preparedStatement.setString(3,userPO.getPassword());
+                preparedStatement.setString(4,userPO.getName());
+                preparedStatement.setString(5,userPO.getContact());
+                preparedStatement.setLong(6,userPO.getCreditValue());
+                preparedStatement.setInt(7,userPO.getMemberType().ordinal());
+                preparedStatement.setString(8,userPO.getMemberInfo());
+                preparedStatement.setString(9,userPO.getWorkid());
+                preparedStatement.execute();
+            }catch(SQLException e){
+                e.printStackTrace();
+                System.out.println("here is the fucking reason 2!!!");
+                return ResultMessage.failure;
+            }
         }
+
         String sql2="select * from user where AES_DECRYPT(unhex(accountName),'"+key+"')='"+userPO.getAccountName()+"'";
         String sql3=""+
                 " update user"+

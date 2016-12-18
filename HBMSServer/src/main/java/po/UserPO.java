@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class UserPO implements Serializable{
 
 
-    private static final long serialVersionUID = 2358054794207235733L;
+    private static final long serialVersionUID = 5931360218602818430L;
     /**
 	 * 
 	 */
@@ -143,5 +143,53 @@ public class UserPO implements Serializable{
 
     public void setCreditValue(long creditValue) {
         this.creditValue = creditValue;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public void setPortrait(File portrait) {
+        this.portrait = portrait;
+    }
+
+    public void setMemberType(MemberType memberType) {
+        this.memberType = memberType;
+    }
+
+    public void setMemberInfo(String memberInfo) {
+        this.memberInfo = memberInfo;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public void setWorkid(String workid) {
+        this.workid = workid;
+    }
+
+    public void setHotelid(int hotelid) {
+        this.hotelid = hotelid;
     }
 }

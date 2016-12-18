@@ -74,6 +74,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public ResultMessage signup(UserPO po) throws RemoteException,Exception{
+
+
         return userDataHelper.addUser(po);
     }
 }
