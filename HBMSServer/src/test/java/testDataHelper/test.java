@@ -1,9 +1,12 @@
 package testDataHelper;
 
+import java.io.File;
 import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import dao.HotelDao;
@@ -32,7 +35,7 @@ public class test {
 	
 	
 		try {
-			Map<String, RoomInfoPO> roomList = roomDao.getRoomList(119, dateFormat.parse("2016-12-15"));
+			Map<String, RoomInfoPO> roomList = roomDao.getRoomList(119, dateFormat.parse("2016-12-18"));
 		
 			for (RoomInfoPO roomInfoPO : roomList.values()) {
 				System.out.println(roomInfoPO);
@@ -42,6 +45,18 @@ public class test {
 			e.printStackTrace();
 		}
 
-		
+		List<File> environment = new ArrayList<>();
+		environment.add(new File("C:/Users/凡/Pictures/butterfly.jpg"));
+		environment.add(new File("C:/Users/凡/Pictures/butterfly.jpg"));
+		environment.add(new File("C:/Users/凡/Pictures/butterfly.jpg"));
+		try {
+	//		hotelDao.addHotel(new HotelPO("王凡的别墅", 0, 5, "不可知之地", 1, "贼好就是找不到", "啥都与", environment, 9.9, 0, "大凡哥"));
+			HotelPO hotelPO = hotelDao.getHotelInfo(143);
+			hotelPO.setEnvironment(environment);
+			hotelDao.modifyHotel(hotelPO);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

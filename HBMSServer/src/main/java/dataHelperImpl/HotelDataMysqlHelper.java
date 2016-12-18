@@ -158,7 +158,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 			preparedStatement = connection.prepareStatement("select max(hotelID) from hotel");
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
-				hotelID =resultSet.getInt(0);
+				hotelID =resultSet.getInt(1);
 				imageHelper.makeHotelDir(hotelID);
 				return hotelID;
 		
@@ -178,7 +178,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 
 		String sql = ""+
 					" update hotel"+
-					" set name=?,address=?,region=?,introdution=?,"+
+					" set name=?,address=?,region=?,introduction=?,"+
 					" star=?,facility=?,score=?"+
 					" where hotelID=?";
 		try {
