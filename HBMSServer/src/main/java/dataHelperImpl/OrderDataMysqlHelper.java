@@ -47,9 +47,11 @@ public class OrderDataMysqlHelper implements OrderDataHelper {
 		}
 
 		if (orderState!=null) {
-			sql.append(" and orderState ="+orderState.ordinal());
 			if (orderState == OrderStateMessage.Abnormal) {
-				sql.append(" or orderState = 4");
+				sql.append(" and orderState >="+orderState.ordinal());
+			}
+			else {
+				sql.append(" and orderState ="+orderState.ordinal());
 			}
 		}
 		switch (orderState) {
