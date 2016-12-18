@@ -211,9 +211,9 @@ public class UserDataMysqlHelper implements UserDataHelper {
             int userID=resultSet.getInt("userID");
             //get the auto-created userID and create the folder to hold the portrait
             String portraitPath=imageHelper.makedir(userID)+"/portrait"+userID+".jpg";
-            File image=userPO.getPortrait();
+            File image=new File(imageHelper.getProjectPath()+"/res/0/admin.png");
             imageHelper.saveImage(image,portraitPath);
-            //add portrait path into usertable
+            //add portrait path into user table
             preparedStatement=connection.prepareStatement(sql3);
             preparedStatement.setString(1,portraitPath);
             preparedStatement.setInt(2,userID);
