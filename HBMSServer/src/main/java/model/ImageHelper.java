@@ -60,6 +60,7 @@ public class ImageHelper {
 
     public void saveImage(File file,String path) throws Exception{
         //remind that the "path" includes the file name and its format, eg. test.jpg
+        if(file==null) return ;
         File imageToSave=new File(path);
         Image image=ImageIO.read(file);
         if(image==null)return;

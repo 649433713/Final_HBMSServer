@@ -12,6 +12,7 @@ public class test_Reestablishment {
     static void reestablish_User()throws Exception{
         Connection connection= DBUtil.getConnection();
         Statement statement=connection.createStatement();
+        //statement.execute("DELETE FROM hbmsdatabase.user");
         statement.execute("ALTER TABLE hbmsdatabase.user AUTO_INCREMENT = 1");
     }
 

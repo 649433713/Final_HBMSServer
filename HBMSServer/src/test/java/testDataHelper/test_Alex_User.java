@@ -41,11 +41,11 @@ public class test_Alex_User {
     static void modifyUser() throws Exception{
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         String time;
-        Date date=simpleDateFormat.parse("1996-9-30");
+        Date date=simpleDateFormat.parse("1996-12-16");
         time=simpleDateFormat.format(date);
         File image=new File("/home/alex/Pictures/test.jpg");
 
-        UserPO userPOTest=new UserPO(2, UserType.Customer,"alex2097","151250187","Alex Yu","15951923079",image,800, MemberType.Person,time,1,null,3);
+        UserPO userPOTest=new UserPO(1, UserType.Customer,"wangfan","admin","Alex Yu","12580",image,800, MemberType.Person,time,1,null,3);
         UserDao userDao=new UserDaoImpl();
         ResultMessage message=userDao.modifyUser(userPOTest);
     }
@@ -100,8 +100,10 @@ public class test_Alex_User {
         Connection connection= DBUtil.getConnection();
         Statement statement=connection.createStatement();
         statement.execute("ALTER TABLE hbmsdatabase.user AUTO_INCREMENT = 1");
-        deleteUser(2);
-        addUser();
+        //deleteUser(7);
+        //deleteUser(8);
+        //deleteUser(8);
+        //addUser();
         //getUser(1);
         //getUser(3);
         //getUser("alex2097");
