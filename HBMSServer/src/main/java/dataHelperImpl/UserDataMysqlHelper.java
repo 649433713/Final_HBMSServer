@@ -66,7 +66,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
                         , resultSet.getString("AES_DECRYPT(unhex(password),'innovator')")
                         , resultSet.getString("AES_DECRYPT(unhex(name),'innovator')")
                         , resultSet.getString("AES_DECRYPT(unhex(contact),'innovator')")
-                        , new File(imageHelper.getProjectPath()+"/res/0/admin.jpg")
+                        , new File(imageHelper.getProjectPath()+"/res/user/0/admin.jpg")
                         , resultSet.getLong("creditValue")
                         , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
                         , resultSet.getString("memberInfo")
@@ -129,7 +129,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
                         , resultSet.getString("AES_DECRYPT(unhex(password),'innovator')")
                         , resultSet.getString("AES_DECRYPT(unhex(name),'innovator')")
                         , resultSet.getString("AES_DECRYPT(unhex(contact),'innovator')")
-                        , new File(imageHelper.getProjectPath()+"/res/0/admin.jpg")
+                        , new File(imageHelper.getProjectPath()+"/res/user/0/admin.jpg")
                         , resultSet.getLong("creditValue")
                         , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
                         , resultSet.getString("memberInfo")
@@ -258,36 +258,73 @@ public class UserDataMysqlHelper implements UserDataHelper {
         ImageHelper imageHelper=new ImageHelper();
         int userID=userPO.getUserID();
 
+        boolean isStaff=true;
+        if(userPO.getHotelid()==0) isStaff=false;
+
         String sql = ""+
                 " update user"+
                 " set userID=?,userType=?,accountName=hex(AES_ENCRYPT(?,'innovator')),password=hex(AES_ENCRYPT(?,'innovator')),name=hex(AES_ENCRYPT(?,'innovator')),"+
                 " contact=hex(AES_ENCRYPT(?,'innovator')),portrait=?,creditValue=?,memberType=?," +
                 "memberInfo=?,hotelID=?,workID=?"+
                 " where userID=?";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1,userID);
-            preparedStatement.setInt(2,userPO.getUserType().ordinal());
-            preparedStatement.setString(3,userPO.getAccountName());
-            preparedStatement.setString(4,userPO.getPassword());
-            preparedStatement.setString(5,userPO.getName());
-            preparedStatement.setString(6,userPO.getContact());
-            String portraitPath=imageHelper.makeUserDir(userID)+"/portrait"+userID+".jpg";
-            preparedStatement.setString(7,portraitPath);
-            preparedStatement.setLong(8,userPO.getCreditValue());
-            preparedStatement.setInt(9,userPO.getMemberType().ordinal());
-            preparedStatement.setString(10,userPO.getMemberInfo());
-            preparedStatement.setInt(11,userPO.getHotelid());
-            preparedStatement.setString(12,userPO.getWorkid());
-            preparedStatement.setInt(13,userID);
-            preparedStatement.execute();
-            File image=userPO.getPortrait();
-            imageHelper.saveImage(image,portraitPath);
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return ResultMessage.failure;
+
+        String sql1 = ""+
+                " update user"+
+                " set userID=?,userType=?,accountName=hex(AES_ENCRYPT(?,'innovator')),password=hex(AES_ENCRYPT(?,'innovator')),name=hex(AES_ENCRYPT(?,'innovator')),"+
+                " contact=hex(AES_ENCRYPT(?,'innovator')),portrait=?,creditValue=?,memberType=?," +
+                "memberInfo=?,workID=?"+
+                " where userID=?";
+        if(isStaff){
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1,userID);
+                preparedStatement.setInt(2,userPO.getUserType().ordinal());
+                preparedStatement.setString(3,userPO.getAccountName());
+                preparedStatement.setString(4,userPO.getPassword());
+                preparedStatement.setString(5,userPO.getName());
+                preparedStatement.setString(6,userPO.getContact());
+                String portraitPath=imageHelper.makeUserDir(userID)+"/portrait"+userID+".jpg";
+                preparedStatement.setString(7,portraitPath);
+                preparedStatement.setLong(8,userPO.getCreditValue());
+                preparedStatement.setInt(9,userPO.getMemberType().ordinal());
+                preparedStatement.setString(10,userPO.getMemberInfo());
+                preparedStatement.setInt(11,userPO.getHotelid());
+                preparedStatement.setString(12,userPO.getWorkid());
+                preparedStatement.setInt(13,userID);
+                preparedStatement.execute();
+                File image=userPO.getPortrait();
+                imageHelper.saveImage(image,portraitPath);
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                return ResultMessage.failure;
+            }
+        }else{
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql1);
+                preparedStatement.setInt(1,userID);
+                preparedStatement.setInt(2,userPO.getUserType().ordinal());
+                preparedStatement.setString(3,userPO.getAccountName());
+                preparedStatement.setString(4,userPO.getPassword());
+                preparedStatement.setString(5,userPO.getName());
+                preparedStatement.setString(6,userPO.getContact());
+                String portraitPath=imageHelper.makeUserDir(userID)+"/portrait"+userID+".jpg";
+                preparedStatement.setString(7,portraitPath);
+                preparedStatement.setLong(8,userPO.getCreditValue());
+                preparedStatement.setInt(9,userPO.getMemberType().ordinal());
+                preparedStatement.setString(10,userPO.getMemberInfo());
+                preparedStatement.setString(11,userPO.getWorkid());
+                preparedStatement.setInt(12,userID);
+                preparedStatement.execute();
+                File image=userPO.getPortrait();
+                imageHelper.saveImage(image,portraitPath);
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                return ResultMessage.failure;
+            }
         }
+
         return ResultMessage.success;
     }
 }
