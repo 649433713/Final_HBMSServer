@@ -9,11 +9,11 @@ import java.util.List;
  *
  */
 public class HotelPO implements Serializable{
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1854219570798741040L;
-
+	private static final long serialVersionUID = -6985078492096193944L;
 	String name;
 	int id;
 	int star;
@@ -24,23 +24,9 @@ public class HotelPO implements Serializable{
 	List<File> environment;
 	double score;
 	int lowestPrice;
+	String accountName;
 	
 	
-
-	public HotelPO(String name, int id, int star, String address, int region, String introduction, String facility,
-			List<File> environment, double score,int lowestPrice) {
-		super();
-		this.name = name;
-		this.id = id;
-		this.star = star;
-		this.address = address;
-		this.region = region;
-		this.introduction = introduction;
-		this.facility = facility;
-		this.environment = environment;
-		this.score = score;
-		this.lowestPrice = lowestPrice;
-	}
 
 	public HotelPO() {
 		// TODO Auto-generated constructor stub
@@ -126,11 +112,35 @@ public class HotelPO implements Serializable{
 		this.lowestPrice = lowestPrice;
 	}
 
+	public String getAccountName() {
+		return accountName;
+	}
+
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
+	}
+
 	@Override
 	public String toString() {
 		return "HotelPO [name=" + name + ", id=" + id + ", star=" + star + ", address=" + address + ", region=" + region
 				+ ", introduction=" + introduction + ", facility=" + facility + ", environment=" + environment
-				+ ", score=" + score + ", lowestPrice=" + lowestPrice + "]";
+				+ ", score=" + score + ", lowestPrice=" + lowestPrice + ", accountName=" + accountName + "]";
+	}
+
+	public HotelPO(String name, int id, int star, String address, int region, String introduction, String facility,
+			List<File> environment, double score, int lowestPrice, String accountName) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.star = star;
+		this.address = address;
+		this.region = region;
+		this.introduction = introduction;
+		this.facility = facility;
+		this.environment = environment;
+		this.score = score;
+		this.lowestPrice = lowestPrice;
+		this.accountName = accountName;
 	}
 
 	

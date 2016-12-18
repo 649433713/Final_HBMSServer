@@ -182,7 +182,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
             resultSet.next();
             int userID=resultSet.getInt("userID");
             //get the auto-created userID and create the folder to hold the portrait
-            String portraitPath=imageHelper.makedir(userID)+"/portrait"+userID+".jpg";
+            String portraitPath=imageHelper.makeUserDir(userID)+"/portrait"+userID+".jpg";
             File image=userPO.getPortrait();
             imageHelper.saveImage(image,portraitPath);
             //add portrait path into usertable
@@ -214,11 +214,11 @@ public class UserDataMysqlHelper implements UserDataHelper {
             preparedStatement = connection.prepareStatement(sql2);
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
-            imageHelper.deldir(imageHelper.getdir(id));
+            imageHelper.deldir(imageHelper.getUserDir(id));
             //delete the image folder
 
         }catch(SQLException e){
-            e.printStackTrace();
+            e.printStackTrace(); 
             return ResultMessage.failure;
         }
         return ResultMessage.success;
@@ -243,7 +243,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
             preparedStatement.setString(4,userPO.getPassword());
             preparedStatement.setString(5,userPO.getName());
             preparedStatement.setString(6,userPO.getContact());
-            String portraitPath=imageHelper.makedir(userID)+"/portrait"+userID+".jpg";
+            String portraitPath=imageHelper.makeUserDir(userID)+"/portrait"+userID+".jpg";
             preparedStatement.setString(7,portraitPath);
             preparedStatement.setLong(8,userPO.getCreditValue());
             preparedStatement.setInt(9,userPO.getMemberType().ordinal());

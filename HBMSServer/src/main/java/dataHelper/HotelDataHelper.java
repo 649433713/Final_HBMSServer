@@ -18,7 +18,7 @@ public interface HotelDataHelper {
 	
 	public Map<Integer,HotelPO> getHotelList(HotelFilter filter, String order, Date date);
 
-	public ResultMessage addHotel(HotelPO hotelPO) ;
+	public int addHotel(HotelPO hotelPO) ;
 	
 	public ResultMessage updateHotel(HotelPO hotelPO);
 	

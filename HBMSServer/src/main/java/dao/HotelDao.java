@@ -25,7 +25,7 @@ public interface HotelDao extends Remote{
 	
 	public HotelPO getHotelInfo(int hotelID)throws RemoteException;
 	
-	public ResultMessage addHotel(HotelPO po)throws RemoteException;
+	public int addHotel(HotelPO po)throws RemoteException;
 	
 	public ResultMessage modifyHotel(HotelPO po)throws RemoteException;
 	

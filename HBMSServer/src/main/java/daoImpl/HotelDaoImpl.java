@@ -58,7 +58,7 @@ public class HotelDaoImpl implements HotelDao{
 
 
 	@Override
-	public ResultMessage addHotel(HotelPO po) {
+	public int addHotel(HotelPO po) {
 		
 		return hotelDataHelper.addHotel(po);
 	}
