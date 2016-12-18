@@ -100,7 +100,7 @@ public class test_Alex_User {
         Connection connection= DBUtil.getConnection();
         Statement statement=connection.createStatement();
         statement.execute("ALTER TABLE hbmsdatabase.user AUTO_INCREMENT = 1");
-        //deleteUser(7);
+        //deleteUser(3);
         //deleteUser(8);
         //deleteUser(8);
         //addUser();

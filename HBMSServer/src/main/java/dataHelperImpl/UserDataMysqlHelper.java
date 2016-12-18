@@ -155,8 +155,8 @@ public class UserDataMysqlHelper implements UserDataHelper {
         String key="innovator";
         boolean isStaff=true;
         if(userPO.getHotelid()==0) isStaff=false;
-        String sql0="INSERT into user(userType,accountName,password,name,contact,creditValue,memberType,memberInfo,workID)" +
-                "VALUES (?,hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),?,?,?,?)";
+        String sql0="INSERT into user(userType,accountName,password,name,contact,creditValue,memberType,memberInfo,workID,rank)" +
+                "VALUES (?,hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),?,?,?,?,?)";
 
         String sql1="INSERT into user(userType,accountName,password,name,contact,creditValue,memberType,memberInfo,workID,hotelID)" +
                 "VALUES (?,hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),hex(AES_ENCRYPT(?,'innovator')),?,?,?,?,?)";
@@ -191,6 +191,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
                 preparedStatement.setInt(7,userPO.getMemberType().ordinal());
                 preparedStatement.setString(8,userPO.getMemberInfo());
                 preparedStatement.setString(9,userPO.getWorkid());
+                preparedStatement.setInt(10,userPO.getRank());
                 preparedStatement.execute();
             }catch(SQLException e){
                 e.printStackTrace();
@@ -211,9 +212,9 @@ public class UserDataMysqlHelper implements UserDataHelper {
             int userID=resultSet.getInt("userID");
             //get the auto-created userID and create the folder to hold the portrait
             String portraitPath=imageHelper.makeUserDir(userID)+"/portrait"+userID+".jpg";
-            File image=userPO.getPortrait();
+            File image=new File(imageHelper.getProjectPath()+"/res/user/0/admin.png");
             imageHelper.saveImage(image,portraitPath);
-            //add portrait path into usertable
+            //add portrait path into user table
             preparedStatement=connection.prepareStatement(sql3);
             preparedStatement.setString(1,portraitPath);
             preparedStatement.setInt(2,userID);
@@ -246,7 +247,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
             //delete the image folder
 
         }catch(SQLException e){
-            e.printStackTrace(); 
+            e.printStackTrace();
             return ResultMessage.failure;
         }
         return ResultMessage.success;
