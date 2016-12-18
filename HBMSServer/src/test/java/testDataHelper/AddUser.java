@@ -14,7 +14,7 @@ public class AddUser {
 		UserDao userDao = new UserDaoImpl();
 		try {
 
-			userDao.addUser(new UserPO(0, UserType.Staff, "小俊", "66666666", "也是小俊", "110", new File("C:/Users/凡/Pictures/butterfly.jpg"), 0,MemberType.Tourist, null,0, null,120));
+			userDao.addUser(new UserPO(0, UserType.WebManager, "小俊2", "66666666", "也是小俊", "110",null, 0,MemberType.Tourist, null,0, null,120));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
