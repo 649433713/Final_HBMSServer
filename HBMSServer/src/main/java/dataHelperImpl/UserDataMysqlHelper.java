@@ -27,10 +27,10 @@ public class UserDataMysqlHelper implements UserDataHelper {
         ImageHelper imageHelper=new ImageHelper();
 
         String sentence="select userID,userType," +
-                "AES_DECRYPT(unhex(accountName),'innovator')," +
-                "AES_DECRYPT(unhex(password),'innovator')," +
-                "AES_DECRYPT(unhex(name),'innovator')," +
-                "AES_DECRYPT(unhex(contact),'innovator')," +
+                "cast(AES_DECRYPT(unhex(accountName),'innovator')as char) str1," +
+                "cast(AES_DECRYPT(unhex(password),'innovator')as char) str2," +
+                "cast(AES_DECRYPT(unhex(name),'innovator')as char) str3," +
+                "cast(AES_DECRYPT(unhex(contact),'innovator')as char) str4," +
                 "portrait,creditValue,memberType,memberInfo," +
                 "rank,workID,hotelID from user where userID='"+id+"'";
         PreparedStatement preparedStatement;
@@ -46,10 +46,10 @@ public class UserDataMysqlHelper implements UserDataHelper {
             try {
                 userPO = new UserPO(resultSet.getInt("userID")
                         , userTypeHelper.getUserType(resultSet.getInt("userType"))
-                        , resultSet.getString("AES_DECRYPT(unhex(accountName),'innovator')")
-                        , resultSet.getString("AES_DECRYPT(unhex(password),'innovator')")
-                        , resultSet.getString("AES_DECRYPT(unhex(name),'innovator')")
-                        , resultSet.getString("AES_DECRYPT(unhex(contact),'innovator')")
+                        , resultSet.getString("str1")
+                        , resultSet.getString("str2")
+                        , resultSet.getString("str3")
+                        , resultSet.getString("str4")
                         , new File(resultSet.getString("portrait"))
                         , resultSet.getLong("creditValue")
                         , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
@@ -62,10 +62,10 @@ public class UserDataMysqlHelper implements UserDataHelper {
                 //resultSet.next();
                 userPO = new UserPO(resultSet.getInt("userID")
                         , userTypeHelper.getUserType(resultSet.getInt("userType"))
-                        , resultSet.getString("AES_DECRYPT(unhex(accountName),'innovator')")
-                        , resultSet.getString("AES_DECRYPT(unhex(password),'innovator')")
-                        , resultSet.getString("AES_DECRYPT(unhex(name),'innovator')")
-                        , resultSet.getString("AES_DECRYPT(unhex(contact),'innovator')")
+                        , resultSet.getString("str1")
+                        , resultSet.getString("str2")
+                        , resultSet.getString("str3")
+                        , resultSet.getString("str4")
                         , new File(imageHelper.getProjectPath()+"/res/0/admin.jpg")
                         , resultSet.getLong("creditValue")
                         , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
@@ -90,10 +90,10 @@ public class UserDataMysqlHelper implements UserDataHelper {
         ImageHelper imageHelper=new ImageHelper();
 
         String sentence="select userID,userType," +
-                "AES_DECRYPT(unhex(accountName),'innovator')," +
-                "AES_DECRYPT(unhex(password),'innovator')," +
-                "AES_DECRYPT(unhex(name),'innovator')," +
-                "AES_DECRYPT(unhex(contact),'innovator')," +
+                "cast(AES_DECRYPT(unhex(accountName),'innovator')as char) str1," +
+                "cast(AES_DECRYPT(unhex(password),'innovator')as char) str2," +
+                "cast(AES_DECRYPT(unhex(name),'innovator')as char) str3," +
+                "cast(AES_DECRYPT(unhex(contact),'innovator')as char) str4," +
                 "portrait,creditValue,memberType,memberInfo," +
                 "rank,workID,hotelID from user where AES_DECRYPT(unhex(accountName),'innovator')='"+accountName+"'";
         PreparedStatement preparedStatement;
@@ -109,10 +109,10 @@ public class UserDataMysqlHelper implements UserDataHelper {
             try {
                 userPO = new UserPO(resultSet.getInt("userID")
                         , userTypeHelper.getUserType(resultSet.getInt("userType"))
-                        , resultSet.getString("AES_DECRYPT(unhex(accountName),'innovator')")
-                        , resultSet.getString("AES_DECRYPT(unhex(password),'innovator')")
-                        , resultSet.getString("AES_DECRYPT(unhex(name),'innovator')")
-                        , resultSet.getString("AES_DECRYPT(unhex(contact),'innovator')")
+                        , resultSet.getString("str1")
+                        , resultSet.getString("str2")
+                        , resultSet.getString("str3")
+                        , resultSet.getString("str4")
                         , new File(resultSet.getString("portrait"))
                         , resultSet.getLong("creditValue")
                         , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
@@ -125,10 +125,10 @@ public class UserDataMysqlHelper implements UserDataHelper {
                 System.out.println("calling null pointer exception handler");
                 userPO = new UserPO(resultSet.getInt("userID")
                         , userTypeHelper.getUserType(resultSet.getInt("userType"))
-                        , resultSet.getString("AES_DECRYPT(unhex(accountName),'innovator')")
-                        , resultSet.getString("AES_DECRYPT(unhex(password),'innovator')")
-                        , resultSet.getString("AES_DECRYPT(unhex(name),'innovator')")
-                        , resultSet.getString("AES_DECRYPT(unhex(contact),'innovator')")
+                        , resultSet.getString("str1")
+                        , resultSet.getString("str2")
+                        , resultSet.getString("str3")
+                        , resultSet.getString("str4")
                         , new File(imageHelper.getProjectPath()+"/res/0/admin.jpg")
                         , resultSet.getLong("creditValue")
                         , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
