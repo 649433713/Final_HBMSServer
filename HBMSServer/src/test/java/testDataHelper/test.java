@@ -104,7 +104,7 @@ public class test {
 			e.printStackTrace();
 		}*/
 		
-		
+		/*
 		CreditDao creditDao = new CreditDaoImpl();
 		Map<Integer, RankPO> map = null;
 		try {
@@ -119,6 +119,14 @@ public class test {
 		}
 		try {
 			System.out.println(creditDao.modifyRankRule(map));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		RoomDao roomDao = new RoomDaoImpl();
+		try {
+			roomDao.modifyRoomStateByDay(9, RoomStateMessage.Blank, new Date());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

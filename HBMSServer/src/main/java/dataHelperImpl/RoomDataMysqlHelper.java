@@ -60,9 +60,11 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 			String dayOff = DateToDayOff.dateToDatOff(date);
 			
 			String sql = "select roomType,defaultPrice from roominfo where hotelID =? group by roomType ";
-			String sql2 = "select * from (select roominfo.roomInfoID roomInfoID,hotelID,roomID,roomType,min(defaultPrice)Price from roomdate inner join roominfo "
-					+ "on roomdate.roomInfoID = roominfo.roomInfoID where roominfo.hotelID = ? "
-					+ "and "+dayOff+"=1 group by roomType)temp order by Price";
+			String sql2 = "select * from (select min(defaultPrice) Price,roomdate.roomInfoID roomInfoID,"
+					+ "hotelID,roomID,roomType,roomState,detailedInfo1,detailedInfo2  from roomdate inner join"
+					+ " roominfo on roomdate.roomInfoID = roominfo.roomInfoID where roominfo.hotelID =? and "
+					+ dayOff+ "=1 group by roomType order by Price) temp";
+			
 			Map<String, RoomInfoPO> roominfo = new LinkedHashMap<>();
 			PreparedStatement preparedStatement;
 			try {
