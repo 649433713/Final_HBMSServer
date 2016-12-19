@@ -339,4 +339,20 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 		
 		return hotelDao.getRegions(city);
 	}
+
+	@Override
+	public Map<Integer, RankPO> getRankList() throws RemoteException {
+		
+		
+		 
+		return creditDao.getRankList();
+	}
+
+	@Override
+	public ResultMessage modifyRankRule(Map<Integer, RankPO> newRule) throws RemoteException {
+		
+		
+		 
+		return creditDao.modifyRankRule(newRule);
+	}
 }

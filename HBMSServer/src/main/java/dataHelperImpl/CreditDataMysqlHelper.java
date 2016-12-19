@@ -8,6 +8,7 @@ import dataHelper.CreditDataHelper;
 import message.ResultMessage;
 import model.CreditRecordReasonTypeHelper;
 import po.CreditRecordPO;
+import po.RankPO;
 
 public class CreditDataMysqlHelper implements CreditDataHelper{
 	Connection connection;
@@ -83,5 +84,47 @@ public class CreditDataMysqlHelper implements CreditDataHelper{
 
 	public Timestamp getTimestamp(Date date) {
 		return new Timestamp(date.getTime());
+	}
+
+
+	@Override
+	public Map<Integer, RankPO> getRankList() {
+		Map<Integer, RankPO> map = new LinkedHashMap<>();
+		String sql = "select * from rank";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				map.put(resultSet.getInt("rank"), new RankPO(resultSet.getInt("rank"), resultSet.getInt("discount"), resultSet.getInt("value")));
+			
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+		return map;
+	}
+
+
+	@Override
+	public ResultMessage modifyRankRule(Map<Integer, RankPO> newRule) {
+		String sql = " update rank set discount =?,value =? where rank.rank=?";
+		PreparedStatement preparedStatement;
+		for (int key : newRule.keySet()) {
+			try {
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setInt(1, newRule.get(key).getDiscount());
+				preparedStatement.setInt(2, newRule.get(key).getValue());
+				preparedStatement.setInt(3,key);
+				preparedStatement.execute();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return ResultMessage.failure;
+			}
+		}
+		return ResultMessage.success;
 	}
 }

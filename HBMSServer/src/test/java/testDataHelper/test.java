@@ -11,10 +11,12 @@ import java.util.Map;
 
 import javax.sound.sampled.AudioFormat.Encoding;
 
+import dao.CreditDao;
 import dao.HotelDao;
 import dao.OrderDao;
 import dao.RoomDao;
 import dao.UserDao;
+import daoImpl.CreditDaoImpl;
 import daoImpl.HotelDaoImpl;
 import daoImpl.OrderDaoImpl;
 import daoImpl.RoomDaoImpl;
@@ -26,6 +28,7 @@ import model.UserType;
 import po.AppealPO;
 import po.HotelPO;
 import po.OrderPO;
+import po.RankPO;
 import po.RoomInfoPO;
 import po.UserPO;
 
@@ -86,11 +89,12 @@ public class test {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		UserDao userDao = new UserDaoImpl();
+		/*UserDao userDao = new UserDaoImpl();
 		try {
 			UserPO userPO = userDao.getUserData(7);
 			
 			System.out.println(userPO.getAccountName());
+			System.out.println(userPO.getName());
 			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -98,7 +102,26 @@ public class test {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
+		
+		CreditDao creditDao = new CreditDaoImpl();
+		Map<Integer, RankPO> map = null;
+		try {
+			map = creditDao.getRankList();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (RankPO rankPO : map.values()) {
+			System.out.println(rankPO);
+			
+		}
+		try {
+			System.out.println(creditDao.modifyRankRule(map));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

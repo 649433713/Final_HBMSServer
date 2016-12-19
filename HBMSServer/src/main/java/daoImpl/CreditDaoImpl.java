@@ -10,6 +10,7 @@ import dataHelper.DataFactory;
 import dataHelperImpl.DataFactoryImpl;
 import message.ResultMessage;
 import po.CreditRecordPO;
+import po.RankPO;
 import po.UserPO;
 
 public class CreditDaoImpl implements CreditDao{
@@ -65,5 +66,17 @@ public class CreditDaoImpl implements CreditDao{
 	@Override
 	public ResultMessage addCreditRecord(CreditRecordPO po) throws RemoteException {
 		return creditDataHelper.addCreditRecord(po);
+	}
+
+	@Override
+	public Map<Integer, RankPO> getRankList() throws RemoteException {
+		
+		return creditDataHelper.getRankList();
+	}
+
+	@Override
+	public ResultMessage modifyRankRule(Map<Integer, RankPO> newRule) throws RemoteException {
+		
+		return creditDataHelper.modifyRankRule(newRule);
 	}
 }

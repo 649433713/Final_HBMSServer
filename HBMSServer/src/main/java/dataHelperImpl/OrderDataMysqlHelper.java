@@ -39,11 +39,15 @@ public class OrderDataMysqlHelper implements OrderDataHelper {
 	}
 	@Override
 	public Map<Integer, OrderPO> getOrderList(int ID, UserType userType, OrderStateMessage orderState) {
+		
+		
 		StringBuffer sql = new StringBuffer("select * from orderlist ");
 		if (userType==UserType.Customer) {
 			sql.append("where userID ="+ID);
 		}else if (userType==UserType.Staff) {
 			sql.append("where hotelID ="+ID);
+		}else {
+			sql.append("where 1=1");
 		}
 
 		if (orderState!=null) {
