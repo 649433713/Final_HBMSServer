@@ -17,4 +17,8 @@ public interface UserDataHelper {
     public ResultMessage deleteUser(int id) throws Exception;
    
     public ResultMessage modifyUser(UserPO userPO) throws Exception;
+
+    public int checkIsOn(int userID) throws Exception;
+
+    public void setIsOn(String accountName,int value) throws Exception;
 }

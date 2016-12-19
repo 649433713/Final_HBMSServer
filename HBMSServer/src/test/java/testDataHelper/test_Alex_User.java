@@ -89,17 +89,22 @@ public class test_Alex_User {
 
     static void login() throws Exception{
         UserDao userDao=new UserDaoImpl();
-        System.out.println("testing login successfully");
-        System.out.println(userDao.login("alex2097","151250187"));
-        System.out.println("testing login failed case");
         System.out.println(userDao.login("alex2097","asdf"));
+        System.out.println(userDao.login("alex2097","123"));
+
         System.out.println(userDao.login("alex2098","asdf"));
+    }
+
+    static void logout()throws Exception{
+        UserDao userDao=new UserDaoImpl();
+        //System.out.println(userDao.logout("alex2098"));
+        //System.out.println(userDao.logout("alex2097"));
     }
 
     public static void main(String args[]) throws Exception{
         Connection connection= DBUtil.getConnection();
         Statement statement=connection.createStatement();
-        statement.execute("ALTER TABLE hbmsdatabase.user AUTO_INCREMENT = 1");
+        //statement.execute("ALTER TABLE hbmsdatabase.user AUTO_INCREMENT = 1");
         //deleteUser(3);
         //deleteUser(8);
         //deleteUser(8);
@@ -111,6 +116,7 @@ public class test_Alex_User {
         //modifyUser();
         //signup();
         //deleteUser(3);
-        //login();
+        //logout();
+        login();
     }
 }

@@ -60,9 +60,16 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public ResultMessage login(String accountName, String pwd) throws RemoteException,Exception {
+
         userPO=userDataHelper.getUserData(accountName);
         if(userPO!=null&&pwd.equals(userPO.getPassword())){
-            return ResultMessage.success;
+
+            if(userDataHelper.checkIsOn(userPO.getUserID())==1){
+                return ResultMessage.failure;
+            }else{
+                userDataHelper.setIsOn(accountName,1);
+                return ResultMessage.success;
+            }
         }else{
             if(userPO!=null){
                 return ResultMessage.wrongPassword;
@@ -75,7 +82,19 @@ public class UserDaoImpl implements UserDao {
     @Override
     public ResultMessage signup(UserPO po) throws RemoteException,Exception{
 
-
         return userDataHelper.addUser(po);
+    }
+
+    @Override
+    public ResultMessage logout(String accountName) throws RemoteException, Exception {
+        userPO=userDataHelper.getUserData(accountName);
+        if(userPO==null) return ResultMessage.notexist;
+        int isOn=userDataHelper.checkIsOn(userPO.getUserID());
+        if(isOn==1){
+            userDataHelper.setIsOn(accountName,0);
+            return ResultMessage.success;
+        }else if(isOn==0){
+            return ResultMessage.failure;
+        }else return ResultMessage.notexist;
     }
 }
