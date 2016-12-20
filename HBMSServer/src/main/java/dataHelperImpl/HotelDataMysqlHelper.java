@@ -411,6 +411,33 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 
 	}
 
+	@Override
+	public RegionPO getSpecificRegion(int regionID) {
+		
+		String sql = "select * from region where regionID =?";
+
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, regionID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			RegionPO regionPO = null;
+			if (resultSet.next()) {
+
+				regionPO = new RegionPO(resultSet.getInt("regionID"),
+						resultSet.getString("province") , resultSet.getString("city"), 
+						resultSet.getString("regionName"));
+				return regionPO;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return null;
+	}
+
 	private ResultMessage saveImage(int hotelID,List<File> images){
 		ImageHelper imageHelper = new ImageHelper();
 		String path1 = null;
@@ -457,4 +484,5 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 	return ResultMessage.success;
 		
 	}
+
 }

@@ -103,5 +103,12 @@ public class HotelDaoImpl implements HotelDao{
 		
 		return hotelDataHelper.getRegions(city);
 	}
+	@Override
+	public RegionPO getSpecificRegion(int regionID) throws RemoteException {
+		
+		
+		 
+		return hotelDataHelper.getSpecificRegion(regionID);
+	}
 
 }

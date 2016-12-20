@@ -40,4 +40,6 @@ public interface HotelDao extends Remote{
 	public List<String> getCities(String province)throws RemoteException;
 	
 	public Map<Integer, RegionPO> getRegions(String city)throws RemoteException;
+	
+	public RegionPO getSpecificRegion(int regionID)throws RemoteException;
 }

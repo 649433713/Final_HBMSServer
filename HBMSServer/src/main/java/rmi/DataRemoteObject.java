@@ -361,4 +361,12 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 		 
 		return creditDao.modifyRankRule(newRule);
 	}
+
+	@Override
+	public RegionPO getSpecificRegion(int regionID) throws RemoteException {
+		
+		
+		 
+		return hotelDao.getSpecificRegion(regionID);
+	}
 }

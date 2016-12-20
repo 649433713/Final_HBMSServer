@@ -33,6 +33,8 @@ public interface HotelDataHelper {
 	public List<String> getCities(String province);
 	
 	public Map<Integer, RegionPO> getRegions(String city);
+
+	public RegionPO getSpecificRegion(int regionID);
 	
 	//��Ϊ��ѯ����Ƶ���Ϣ֮ǰ  ���в�ѯ�Ƶ��б�
 }
