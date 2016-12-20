@@ -230,7 +230,8 @@ public class OrderDataMysqlHelper implements OrderDataHelper {
 			while (resultSet.next()) {
 				appealPO = new AppealPO(resultSet.getInt("appealID"), resultSet.getInt("orderID"), 
 						resultSet.getInt("userID"), resultSet.getInt("webMarketerID"),resultSet.getDate("appealTime"), 
-						resultSet.getString("content"), AppealStateMessage.values()[resultSet.getInt("appealState")]);
+						resultSet.getString("content"), AppealStateMessage.values()[resultSet.getInt("appealState")],
+						resultSet.getInt("price"));
 			
 				map.put(appealPO.getAppealID(), appealPO);
 			}

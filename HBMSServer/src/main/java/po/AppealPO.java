@@ -10,10 +10,11 @@ import message.AppealStateMessage;
  *
  */
 public class AppealPO implements Serializable{
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1534591067889715125L;
+	private static final long serialVersionUID = -940619443323947505L;
 	int appealID;
 	int orderID;
 	int userID;
@@ -21,10 +22,11 @@ public class AppealPO implements Serializable{
 	Date appealTime;
 	String content;
 	AppealStateMessage appealState;
+	int price;
 	
 	
 	public AppealPO(int appealID, int orderID, int userID, int webMarketerID, Date appealTime, String content,
-			AppealStateMessage appealState) {
+			AppealStateMessage appealState,int price) {
 		super();
 		this.appealID = appealID;
 		this.orderID = orderID;
@@ -33,6 +35,7 @@ public class AppealPO implements Serializable{
 		this.appealTime = appealTime;
 		this.content = content;
 		this.appealState = appealState;
+		this.price = price;
 	}
 
 
@@ -106,13 +109,25 @@ public class AppealPO implements Serializable{
 	}
 
 
+	
+	public int getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+
 	@Override
 	public String toString() {
 		return "AppealPO [appealID=" + appealID + ", orderID=" + orderID + ", userID=" + userID + ", webMarketerID="
 				+ webMarketerID + ", appealTime=" + appealTime + ", content=" + content + ", appealState=" + appealState
-				+ "]";
+				+ ", price=" + price + "]";
 	}
-	
+
+
 	
 	
 }
