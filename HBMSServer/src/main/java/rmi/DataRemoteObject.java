@@ -18,11 +18,12 @@ import model.UserType;
 import po.*;
 
 public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, UserDao,  OrderDao, RoomDao ,CreditDao, PromotionDao {
-	
+
+	private static final long serialVersionUID = -2989257650308803644L;
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1784191870909836244L;
+
 	//鍒殑dao鐨勬帴鍙ｉ兘implements ,鐒跺悗鍐欏湪杩欙紝鐒跺悗鏋勯�犲嚱鏁伴噷鍒濆鍖�
 	private HotelDao hotelDao;
 	private UserDao userDao;
@@ -272,6 +273,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 		
 		
 		return userDao.signup(po);
+	}
+
+	@Override
+	public ResultMessage logout(String accountName) throws RemoteException, Exception {
+		return userDao.logout(accountName);
 	}
 
 	@Override

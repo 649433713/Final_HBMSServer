@@ -327,4 +327,42 @@ public class UserDataMysqlHelper implements UserDataHelper {
 
         return ResultMessage.success;
     }
+
+    @Override
+    public int checkIsOn(int userID) throws Exception {
+        PreparedStatement preparedStatement;
+        String sql="" + " Select * from user " + " where userID = ? ";
+        int isOn;
+        try{
+            preparedStatement=connection.prepareStatement(sql);
+            preparedStatement.setInt(1,userID);;
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(resultSet.next()){
+                isOn=resultSet.getInt("isOn");
+                return isOn;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return 2;
+    }
+
+    @Override
+    public void setIsOn(String accountName,int value) throws Exception {
+        PreparedStatement preparedStatement;
+        UserPO userPO=getUserData(accountName);
+        int userID=userPO.getUserID();
+        String sql = ""+
+                " update user"+
+                " set isOn=?"+
+                " where userID=?";
+        try{
+            preparedStatement=connection.prepareStatement(sql);
+            preparedStatement.setInt(1,value);
+            preparedStatement.setInt(2,userID);
+            preparedStatement.execute();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
