@@ -262,7 +262,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 				}
 
 				commentInfoPO = new CommentInfoPO(resultSet.getInt("commentID"), 
-						resultSet.getDate("time"), resultSet.getInt("hotelID"), 
+						resultSet.getTimestamp("time"), resultSet.getInt("hotelID"), 
 						resultSet.getInt("score"), resultSet.getString("comment"),
 						image1,image2,image3,resultSet.getInt("orderID"));
 

@@ -43,8 +43,8 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 
 					roomInfoPO = new RoomInfoPO(resultSet.getInt("roomInfoID"), resultSet.getInt("hotelID"),
 							resultSet.getString("roomID"), resultSet.getString("roomType"), resultSet.getInt("defaultPrice"),
-							RoomStateMessage.values()[resultSet.getInt("roomState")], resultSet.getDate("detailedInfo1"),
-							resultSet.getDate("detailedInfo2"));
+							RoomStateMessage.values()[resultSet.getInt("roomState")], resultSet.getTimestamp("detailedInfo1"),
+							resultSet.getTimestamp("detailedInfo2"));
 
 					map.put(roomInfoPO.getRoomID(), roomInfoPO);
 				}

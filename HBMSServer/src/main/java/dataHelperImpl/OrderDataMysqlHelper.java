@@ -91,8 +91,8 @@ public class OrderDataMysqlHelper implements OrderDataHelper {
 			while(resultSet.next()){
 				orderPO = new OrderPO(resultSet.getInt("orderID"), resultSet.getInt("userID"),
 						resultSet.getInt("hotelID"), resultSet.getInt("roomInfoID"),OrderStateMessage.values()[resultSet.getInt("orderState")], 
-						resultSet.getDate("generateTime"), resultSet.getDate("cancelTime"), resultSet.getDate("executeDDl"),
-						resultSet.getDate("checkinTime"), resultSet.getDate("checkoutTime"), resultSet.getInt("number"), 
+						resultSet.getTimestamp("generateTime"), resultSet.getTimestamp("cancelTime"), resultSet.getTimestamp("executeDDl"),
+						resultSet.getTimestamp("checkinTime"), resultSet.getTimestamp("checkoutTime"), resultSet.getInt("number"), 
 						resultSet.getInt("hasChild"), resultSet.getInt("price"));
 				
 				map.put(orderPO.getOrderID(), orderPO);
@@ -229,10 +229,9 @@ public class OrderDataMysqlHelper implements OrderDataHelper {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				appealPO = new AppealPO(resultSet.getInt("appealID"), resultSet.getInt("orderID"), 
-						resultSet.getInt("userID"), resultSet.getInt("webMarketerID"),resultSet.getDate("appealTime"), 
+						resultSet.getInt("userID"), resultSet.getInt("webMarketerID"),resultSet.getTimestamp("appealTime"), 
 						resultSet.getString("content"), AppealStateMessage.values()[resultSet.getInt("appealState")],
 						resultSet.getInt("price"));
-			
 				map.put(appealPO.getAppealID(), appealPO);
 			}
 		} catch (SQLException e) {

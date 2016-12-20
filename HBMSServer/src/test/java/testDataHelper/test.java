@@ -2,6 +2,7 @@ package testDataHelper;
 
 import java.io.File;
 import java.rmi.RemoteException;
+import java.sql.SQLClientInfoException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -124,9 +125,25 @@ public class test {
 			e.printStackTrace();
 		}*/
 		
-		RoomDao roomDao = new RoomDaoImpl();
+		/*RoomDao roomDao = new RoomDaoImpl();
 		try {
 			roomDao.modifyRoomStateByDay(9, RoomStateMessage.Blank, new Date());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		OrderDao orderDao = new OrderDaoImpl();
+		try {
+			for (AppealPO orderPO : orderDao.getAppealOrderList(8).values()) {
+				System.out.println(orderPO);
+			}
+			
+			for (OrderPO orderPO : orderDao.getAbnormalOrderList(119, UserType.Staff).values()) {
+		
+		//		System.out.println(orderPO.getGenerateTime());
+			}
+	
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

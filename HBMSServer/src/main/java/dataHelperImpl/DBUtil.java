@@ -8,7 +8,7 @@ import java.sql.*;
  */
 public class DBUtil {
 	
-	private static final String URL = "jdbc:mysql://localhost:3306/hbmsdatabase?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false";
+	private static final String URL = "jdbc:mysql://localhost:3306/hbmsdatabase?serverTimezone=GMT%2b8&characterEncoding=utf8&useUnicode=true&useSSL=false";
 	private static final String USER = "admin";
 	private static final String PASSWORD = "admin";
 	
