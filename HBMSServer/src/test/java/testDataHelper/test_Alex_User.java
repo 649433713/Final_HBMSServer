@@ -102,8 +102,8 @@ public class test_Alex_User {
     }
 
     public static void main(String args[]) throws Exception{
-        Connection connection= DBUtil.getConnection();
-        Statement statement=connection.createStatement();
+        //Connection connection= DBUtil.getConnection();
+        //Statement statement=connection.createStatement();
         //statement.execute("ALTER TABLE hbmsdatabase.user AUTO_INCREMENT = 1");
         //deleteUser(3);
         //deleteUser(8);
@@ -117,6 +117,9 @@ public class test_Alex_User {
         //signup();
         //deleteUser(3);
         //logout();
-        login();
+        //login();
+        UserDao userDao = new UserDaoImpl();
+        UserPO userPO = userDao.getUserData(4);
+        System.out.println(userPO);
     }
 }

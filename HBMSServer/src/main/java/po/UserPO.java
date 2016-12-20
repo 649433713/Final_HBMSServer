@@ -9,11 +9,12 @@ import java.io.Serializable;
 public class UserPO implements Serializable{
 
 
-    private static final long serialVersionUID = 5931360218602818430L;
-    /**
+   
+
+	/**
 	 * 
 	 */
-
+	private static final long serialVersionUID = 2912504804953590514L;
 	int userID;
     UserType userType;
     String accountName;
@@ -192,4 +193,14 @@ public class UserPO implements Serializable{
     public void setHotelid(int hotelid) {
         this.hotelid = hotelid;
     }
+
+	@Override
+	public String toString() {
+		return "UserPO [userID=" + userID + ", userType=" + userType + ", accountName=" + accountName + ", password="
+				+ password + ", name=" + name + ", contact=" + contact + ", portrait=" + portrait + ", creditValue="
+				+ creditValue + ", memberType=" + memberType + ", memberInfo=" + memberInfo + ", rank=" + rank
+				+ ", workid=" + workid + ", hotelid=" + hotelid + "]";
+	}
+    
+    
 }
