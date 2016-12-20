@@ -55,6 +55,10 @@ public class OrderDataMysqlHelper implements OrderDataHelper {
 				sql.append(" and orderState ="+orderState.ordinal());
 				sql.append(" or "+OrderStateMessage.appealing.ordinal());
 			}
+			else if (orderState == OrderStateMessage.Executed) {
+				sql.append(" and orderState ="+orderState.ordinal());
+				sql.append(" or "+OrderStateMessage.commented.ordinal());
+			}
 			else {
 				sql.append(" and orderState ="+orderState.ordinal());
 			}

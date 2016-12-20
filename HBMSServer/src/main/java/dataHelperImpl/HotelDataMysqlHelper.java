@@ -264,7 +264,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 				commentInfoPO = new CommentInfoPO(resultSet.getInt("commentID"), 
 						resultSet.getDate("time"), resultSet.getInt("hotelID"), 
 						resultSet.getInt("score"), resultSet.getString("comment"),
-						image1,image2,image3);
+						image1,image2,image3,resultSet.getInt("orderID"));
 
 				list.add(commentInfoPO);
 			}
@@ -308,8 +308,8 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 		 */
 		String sql = ""+
 					" insert into commentinfo"+
-					" (time,hotelID,score,comment,picture1,picture2,picture3)"+
-					" values(?,?,?,?,?,?,?)";
+					" (time,hotelID,score,comment,picture1,picture2,picture3,orderID)"+
+					" values(?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
@@ -320,6 +320,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 			preparedStatement.setString(5, imagePath1);
 			preparedStatement.setString(6, imagePath2);
 			preparedStatement.setString(7, imagePath3);
+			preparedStatement.setInt(8, commentInfoPO.getOrderID());
 			preparedStatement.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

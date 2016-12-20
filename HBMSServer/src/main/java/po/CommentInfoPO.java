@@ -10,10 +10,11 @@ import java.util.Date;
  */
 public class CommentInfoPO implements Serializable{
 	
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8381182810961789730L;
+	private static final long serialVersionUID = 2164665350658521506L;
 	int commentID;
 	Date time;
 	int hotelID;
@@ -22,18 +23,7 @@ public class CommentInfoPO implements Serializable{
 	File picture1;
 	File picture2;
 	File picture3;
-	public CommentInfoPO(int commentID, Date time, int hotelID, int score, String comment, File picture1,
-			File picture2, File picture3) {
-		super();
-		this.commentID = commentID;
-		this.time = time;
-		this.hotelID = hotelID;
-		this.score = score;
-		this.comment = comment;
-		this.picture1 = picture1;
-		this.picture2 = picture2;
-		this.picture3 = picture3;
-	}
+	int orderID;
 	public int getCommentID() {
 		return commentID;
 	}
@@ -82,13 +72,31 @@ public class CommentInfoPO implements Serializable{
 	public void setPicture3(File picture3) {
 		this.picture3 = picture3;
 	}
+	public int getOrderID() {
+		return orderID;
+	}
+	public void setOrderID(int orderID) {
+		this.orderID = orderID;
+	}
 	@Override
 	public String toString() {
 		return "CommentInfoPO [commentID=" + commentID + ", time=" + time + ", hotelID=" + hotelID + ", score=" + score
 				+ ", comment=" + comment + ", picture1=" + picture1 + ", picture2=" + picture2 + ", picture3="
-				+ picture3 + "]";
+				+ picture3 + ", orderID=" + orderID + "]";
 	}
-	
-	
+	public CommentInfoPO(int commentID, Date time, int hotelID, int score, String comment, File picture1, File picture2,
+			File picture3, int orderID) {
+		super();
+		this.commentID = commentID;
+		this.time = time;
+		this.hotelID = hotelID;
+		this.score = score;
+		this.comment = comment;
+		this.picture1 = picture1;
+		this.picture2 = picture2;
+		this.picture3 = picture3;
+		this.orderID = orderID;
+	}
+		
 	
 }
