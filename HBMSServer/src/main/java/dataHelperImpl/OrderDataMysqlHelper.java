@@ -223,7 +223,9 @@ public class OrderDataMysqlHelper implements OrderDataHelper {
 		PreparedStatement preparedStatement;
 		try {
 			preparedStatement = connection.prepareStatement(sql.toString());
-			preparedStatement.setInt(1, userID);
+			if (userID!=0) {
+				preparedStatement.setInt(1, userID);
+			}
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				appealPO = new AppealPO(resultSet.getInt("appealID"), resultSet.getInt("orderID"), 
