@@ -52,12 +52,12 @@ public class OrderDataMysqlHelper implements OrderDataHelper {
 
 		if (orderState!=null) {
 			if (orderState == OrderStateMessage.Abnormal) {
-				sql.append(" and orderState ="+orderState.ordinal());
-				sql.append(" or "+OrderStateMessage.appealing.ordinal());
+				sql.append(" and (orderState ="+orderState.ordinal());
+				sql.append(" or orderState = "+OrderStateMessage.appealing.ordinal()+")");
 			}
 			else if (orderState == OrderStateMessage.Executed) {
-				sql.append(" and orderState ="+orderState.ordinal());
-				sql.append(" or "+OrderStateMessage.commented.ordinal());
+				sql.append(" and (orderState ="+orderState.ordinal());
+				sql.append(" or orderState = "+OrderStateMessage.commented.ordinal()+")");
 			}
 			else {
 				sql.append(" and orderState ="+orderState.ordinal());
