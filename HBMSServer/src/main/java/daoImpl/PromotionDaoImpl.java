@@ -37,30 +37,30 @@ public class PromotionDaoImpl implements PromotionDao{
 
 
 	@Override
-	public Map<Integer, PromotionPO> getHotelPromotionList(PromotionFilter promotionFilter) throws RemoteException,Exception {
+	public Map<Integer, PromotionPO> getHotelPromotionList(PromotionFilter promotionFilter) throws RemoteException{
 		promotionFilter.add("promotionType","=", PromotionType.HotelPromotion.ordinal());
 		return promotionDataHelper.getPromotionList(promotionFilter);
 	}
 
 	@Override
-	public Map<Integer, PromotionPO> getWebPromotionList(PromotionFilter promotionFilter) throws RemoteException,Exception {
+	public Map<Integer, PromotionPO> getWebPromotionList(PromotionFilter promotionFilter) throws RemoteException{
 		promotionFilter.add("promotionType","=",PromotionType.WebPromotion.ordinal());
 		return promotionDataHelper.getPromotionList(promotionFilter);
 	}
 
 
 	@Override
-	public ResultMessage addPromotion(PromotionPO po) throws RemoteException,Exception {
+	public ResultMessage addPromotion(PromotionPO po) throws RemoteException{
 		return promotionDataHelper.addPromotion(po);
 	}
 
 	@Override
-	public ResultMessage deletePromotion(int id) throws RemoteException,Exception {
+	public ResultMessage deletePromotion(int id) throws RemoteException{
 		return promotionDataHelper.deletePromotion(id);
 	}
 
 	@Override
-	public ResultMessage updatePromotion(PromotionPO po) throws RemoteException,Exception {
+	public ResultMessage updatePromotion(PromotionPO po) throws RemoteException{
 		return promotionDataHelper.updatePromotion(po);
 	}
 }
