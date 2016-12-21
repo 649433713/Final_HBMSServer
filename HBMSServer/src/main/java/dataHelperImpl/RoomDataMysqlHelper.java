@@ -134,7 +134,7 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 	public ResultMessage modifyRoom(RoomInfoPO po) {
 
 		String sql =" update roominfo"
-				+ " set hotelID=?,roomID=?,roomType=?,defaultPrice=?,roomState=?,detailedInfo1=?,detailedInfo2=?"
+				+ " set hotelID=?,roomID=?,roomType=?,defaultPrice=?,roomState=?"
 				+ " where roomInfoID =?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -144,9 +144,9 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 			preparedStatement.setString(3, po.getRoomType());
 			preparedStatement.setInt(4, po.getDefaultPrice());
 			preparedStatement.setInt(5, po.getRoomState().ordinal());
-			preparedStatement.setDate(6, new Date(po.getDetailedInfo1().getTime()));
-			preparedStatement.setDate(7, new Date(po.getDetailedInfo2().getTime()));
-			preparedStatement.setInt(8, po.getRoomInfoID());
+//			preparedStatement.setDate(6, new Date(po.getDetailedInfo1().getTime()));
+//			preparedStatement.setDate(7, new Date(po.getDetailedInfo2().getTime()));
+			preparedStatement.setInt(6, po.getRoomInfoID());
 			preparedStatement.execute();
 			
 			

@@ -133,7 +133,7 @@ public class test {
 			e.printStackTrace();
 		}*/
 		
-		OrderDao orderDao = new OrderDaoImpl();
+		/*OrderDao orderDao = new OrderDaoImpl();
 		try {
 			for (AppealPO orderPO : orderDao.getAppealOrderList(8).values()) {
 				System.out.println(orderPO);
@@ -145,6 +145,17 @@ public class test {
 			}
 	
 		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		UserDao userDao = new UserDaoImpl();
+		try {
+			System.out.println(userDao.login("谢振宇SB", "123456"));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
