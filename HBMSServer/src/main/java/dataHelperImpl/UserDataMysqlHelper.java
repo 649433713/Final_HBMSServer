@@ -20,7 +20,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
     }
 
     @Override
-    public UserPO getUserData(int id)throws Exception {
+    public UserPO getUserData(int id){
         ResultSet resultSet;
         UserTypeHelper userTypeHelper=new UserTypeHelper();
         MemberTypeHelper memberTypeHelper=new MemberTypeHelper();
@@ -60,20 +60,24 @@ public class UserDataMysqlHelper implements UserDataHelper {
                 );
             }catch(NullPointerException ne){
                 //resultSet.next();
-                userPO = new UserPO(resultSet.getInt("userID")
-                        , userTypeHelper.getUserType(resultSet.getInt("userType"))
-                        , resultSet.getString("str1")
-                        , resultSet.getString("str2")
-                        , resultSet.getString("str3")
-                        , resultSet.getString("str4")
-                        , new File(imageHelper.getProjectPath()+"/res/user/0/admin.jpg")
-                        , resultSet.getLong("creditValue")
-                        , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
-                        , resultSet.getString("memberInfo")
-                        , 0
-                        , resultSet.getString("workID")
-                        , resultSet.getInt("hotelID")
-                );
+                try {
+                    userPO = new UserPO(resultSet.getInt("userID")
+                            , userTypeHelper.getUserType(resultSet.getInt("userType"))
+                            , resultSet.getString("str1")
+                            , resultSet.getString("str2")
+                            , resultSet.getString("str3")
+                            , resultSet.getString("str4")
+                            , new File(imageHelper.getProjectPath() + "/res/user/0/admin.jpg")
+                            , resultSet.getLong("creditValue")
+                            , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
+                            , resultSet.getString("memberInfo")
+                            , 0
+                            , resultSet.getString("workID")
+                            , resultSet.getInt("hotelID")
+                    );
+                }catch(Exception e2){
+                    e2.printStackTrace();
+                }
             }
         }catch(SQLException e){
             e.printStackTrace();
@@ -83,7 +87,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
     }
 
     @Override
-    public UserPO getUserData(String accountName) throws Exception{
+    public UserPO getUserData(String accountName){
         ResultSet resultSet;
         UserTypeHelper userTypeHelper=new UserTypeHelper();
         MemberTypeHelper memberTypeHelper=new MemberTypeHelper();
@@ -122,21 +126,24 @@ public class UserDataMysqlHelper implements UserDataHelper {
                         , resultSet.getInt("hotelID")
                 );
             }catch(NullPointerException ne){
-                System.out.println("calling null pointer exception handler");
-                userPO = new UserPO(resultSet.getInt("userID")
-                        , userTypeHelper.getUserType(resultSet.getInt("userType"))
-                        , resultSet.getString("str1")
-                        , resultSet.getString("str2")
-                        , resultSet.getString("str3")
-                        , resultSet.getString("str4")
-                        , new File(imageHelper.getProjectPath()+"/res/user/0/admin.jpg")
-                        , resultSet.getLong("creditValue")
-                        , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
-                        , resultSet.getString("memberInfo")
-                        , 0
-                        , resultSet.getString("workID")
-                        , resultSet.getInt("hotelID")
-                );
+                try {
+                    userPO = new UserPO(resultSet.getInt("userID")
+                            , userTypeHelper.getUserType(resultSet.getInt("userType"))
+                            , resultSet.getString("str1")
+                            , resultSet.getString("str2")
+                            , resultSet.getString("str3")
+                            , resultSet.getString("str4")
+                            , new File(imageHelper.getProjectPath() + "/res/user/0/admin.jpg")
+                            , resultSet.getLong("creditValue")
+                            , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
+                            , resultSet.getString("memberInfo")
+                            , 0
+                            , resultSet.getString("workID")
+                            , resultSet.getInt("hotelID")
+                    );
+                }catch (Exception e2){
+                    e2.printStackTrace();
+                }
             }
         }catch(SQLException e){
             e.printStackTrace();
@@ -148,9 +155,15 @@ public class UserDataMysqlHelper implements UserDataHelper {
     }
 
     @Override
-    public ResultMessage addUser(UserPO userPO) throws Exception{
+    public ResultMessage addUser(UserPO userPO){
         ImageHelper imageHelper=new ImageHelper();
-        Statement statement=connection.createStatement();
+        try {
+            Statement statement = connection.createStatement();
+        }catch(SQLException e){
+            e.printStackTrace();
+            System.out.println("here is the fucking reason 0");
+            return ResultMessage.failure;
+        }
         PreparedStatement preparedStatement;
         String key="innovator";
         boolean isStaff=true;
@@ -222,13 +235,16 @@ public class UserDataMysqlHelper implements UserDataHelper {
         }catch(SQLException e){
             e.printStackTrace();
             return ResultMessage.failure;
+        }catch(Exception e2){
+            e2.printStackTrace();
+            return ResultMessage.failure;
         }
 
         return ResultMessage.success;
     }
 
     @Override
-    public ResultMessage deleteUser(int id) throws Exception{
+    public ResultMessage deleteUser(int id){
         ImageHelper imageHelper=new ImageHelper();
         //remind that when deleting a user, the portrait info(both image and its path) should be deleted
         String sql="" + " Select * from user" + " where userID =? ";
@@ -249,12 +265,15 @@ public class UserDataMysqlHelper implements UserDataHelper {
         }catch(SQLException e){
             e.printStackTrace();
             return ResultMessage.failure;
+        }catch(Exception e2){
+            e2.printStackTrace();
+            return ResultMessage.failure;
         }
         return ResultMessage.success;
     }
 
     @Override
-    public ResultMessage modifyUser(UserPO userPO) throws Exception{
+    public ResultMessage modifyUser(UserPO userPO){
         ImageHelper imageHelper=new ImageHelper();
         int userID=userPO.getUserID();
 
@@ -298,6 +317,9 @@ public class UserDataMysqlHelper implements UserDataHelper {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
                 return ResultMessage.failure;
+            }catch(Exception e2){
+                e2.printStackTrace();
+                return ResultMessage.failure;
             }
         }else{
             try {
@@ -322,6 +344,9 @@ public class UserDataMysqlHelper implements UserDataHelper {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
                 return ResultMessage.failure;
+            }catch(Exception e2){
+                e2.printStackTrace();
+                return ResultMessage.failure;
             }
         }
 
@@ -329,7 +354,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
     }
 
     @Override
-    public int checkIsOn(int userID) throws Exception {
+    public int checkIsOn(int userID){
         PreparedStatement preparedStatement;
         String sql="" + " Select * from user " + " where userID = ? ";
         int isOn;
@@ -348,7 +373,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
     }
 
     @Override
-    public void setIsOn(String accountName,int value) throws Exception {
+    public void setIsOn(String accountName,int value){
         PreparedStatement preparedStatement;
         UserPO userPO=getUserData(accountName);
         int userID=userPO.getUserID();

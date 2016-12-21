@@ -19,7 +19,8 @@ import po.*;
 
 public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, UserDao,  OrderDao, RoomDao ,CreditDao, PromotionDao {
 
-	private static final long serialVersionUID = -2989257650308803644L;
+
+	private static final long serialVersionUID = 777723484333314158L;
 	/**
 	 * 
 	 */
@@ -227,66 +228,66 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public UserPO getUserData(int id) throws RemoteException,Exception {
+	public UserPO getUserData(int id) throws RemoteException{
 		
 		
 		return userDao.getUserData(id);
 	}
 
 	@Override
-	public UserPO getUserData(String accountName) throws RemoteException ,Exception{
+	public UserPO getUserData(String accountName) throws RemoteException{
 
 
 		return userDao.getUserData(accountName);
 	}
 
 	@Override
-	public ResultMessage addUser(UserPO po) throws RemoteException, Exception {
+	public ResultMessage addUser(UserPO po) throws RemoteException{
 		
 		
 		return userDao.addUser(po);
 	}
 
 	@Override
-	public ResultMessage deleteUser(int id) throws RemoteException, Exception {
+	public ResultMessage deleteUser(int id) throws RemoteException{
 		
 		
 		return userDao.deleteUser(id);
 	}
 
 	@Override
-	public ResultMessage modifyUser(UserPO po) throws RemoteException, Exception {
+	public ResultMessage modifyUser(UserPO po) throws RemoteException{
 		
 		
 		return userDao.modifyUser(po);
 	}
 
 	@Override
-	public ResultMessage login(String accountName, String pwd) throws RemoteException,Exception {
-		
+	public ResultMessage login(String accountName, String pwd) throws RemoteException{
+
 		
 		return userDao.login(accountName,pwd);
 	}
 
 	@Override
-	public ResultMessage signup(UserPO po) throws RemoteException, Exception {
+	public ResultMessage signup(UserPO po) throws RemoteException{
 		
 		
 		return userDao.signup(po);
 	}
 
 	@Override
-	public ResultMessage logout(String accountName) throws RemoteException, Exception {
+	public ResultMessage logout(String accountName) throws RemoteException{
 		return userDao.logout(accountName);
 	}
 
 	@Override
-	public long getCreditValue(int userID) throws RemoteException, Exception {
+	public long getCreditValue(int userID) throws RemoteException{
 		return creditDao.getCreditValue(userID);
 	}
 
 	@Override
-	public ResultMessage setCreditValue(int userID, long value) throws RemoteException, Exception {
+	public ResultMessage setCreditValue(int userID, long value) throws RemoteException{
 		return creditDao.setCreditValue(userID,value);
 	}
 
@@ -301,27 +302,27 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public Map<Integer, PromotionPO> getHotelPromotionList(PromotionFilter promotionFilter) throws RemoteException,Exception {
+	public Map<Integer, PromotionPO> getHotelPromotionList(PromotionFilter promotionFilter) throws RemoteException{
 		return promotionDao.getHotelPromotionList(promotionFilter);
 	}
 
 	@Override
-	public Map<Integer, PromotionPO> getWebPromotionList(PromotionFilter promotionFilter) throws RemoteException,Exception {
+	public Map<Integer, PromotionPO> getWebPromotionList(PromotionFilter promotionFilter) throws RemoteException{
 		return promotionDao.getWebPromotionList(promotionFilter);
 	}
 
 	@Override
-	public ResultMessage addPromotion(PromotionPO po) throws RemoteException,Exception {
+	public ResultMessage addPromotion(PromotionPO po) throws RemoteException{
 		return promotionDao.addPromotion(po);
 	}
 
 	@Override
-	public ResultMessage deletePromotion(int id) throws RemoteException,Exception {
+	public ResultMessage deletePromotion(int id) throws RemoteException{
 		return promotionDao.deletePromotion(id);
 	}
 
 	@Override
-	public ResultMessage updatePromotion(PromotionPO po) throws RemoteException,Exception {
+	public ResultMessage updatePromotion(PromotionPO po) throws RemoteException{
 		return promotionDao.updatePromotion(po);
 	}
 

@@ -13,20 +13,20 @@ import java.util.ArrayList;
  */
 
 public interface UserDao extends Remote{
-    public UserPO getUserData(int id) throws  RemoteException,Exception;
+    public UserPO getUserData(int id) throws  RemoteException;
 
-    public UserPO getUserData(String accountName) throws RemoteException,Exception;
+    public UserPO getUserData(String accountName) throws RemoteException;
    
-    public ResultMessage addUser(UserPO po) throws RemoteException,Exception;
+    public ResultMessage addUser(UserPO po) throws RemoteException;
    
-    public ResultMessage deleteUser(int id) throws RemoteException,Exception;
+    public ResultMessage deleteUser(int id) throws RemoteException;
    
-    public ResultMessage modifyUser(UserPO po) throws RemoteException,Exception;
+    public ResultMessage modifyUser(UserPO po) throws RemoteException;
    
-    public ResultMessage login(String accountName, String pwd) throws RemoteException,Exception;
+    public ResultMessage login(String accountName, String pwd) throws RemoteException;
    
-    public ResultMessage signup(UserPO po) throws RemoteException,Exception;
+    public ResultMessage signup(UserPO po) throws RemoteException;
 
-    public ResultMessage logout(String accountName) throws RemoteException,Exception;
+    public ResultMessage logout(String accountName) throws RemoteException;
 
 }
