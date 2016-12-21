@@ -40,7 +40,7 @@ public class CreditDaoImpl implements CreditDao{
 	}
 
 	@Override
-	public long getCreditValue(int userID) throws RemoteException,Exception {
+	public long getCreditValue(int userID) throws RemoteException{
 		long creditValue;
 		UserDao userDao=new UserDaoImpl();
 		UserPO userPO=userDao.getUserData(userID);
@@ -49,7 +49,7 @@ public class CreditDaoImpl implements CreditDao{
 	}
 
 	@Override
-	public ResultMessage setCreditValue(int userID, long value) throws RemoteException,Exception{
+	public ResultMessage setCreditValue(int userID, long value) throws RemoteException{
 		UserDao userDao=new UserDaoImpl();
 		UserPO userPO=userDao.getUserData(userID);
 		userPO.setCreditValue(value);

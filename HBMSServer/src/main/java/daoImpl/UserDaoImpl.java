@@ -35,31 +35,31 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public UserPO getUserData(int id) throws RemoteException,Exception {
+    public UserPO getUserData(int id) throws RemoteException{
         return userDataHelper.getUserData(id);
     }
 
-    public UserPO getUserData(String accountName) throws RemoteException,Exception{
+    public UserPO getUserData(String accountName) throws RemoteException{
         return userDataHelper.getUserData(accountName);
     }
 
     @Override
-    public ResultMessage addUser(UserPO po) throws RemoteException,Exception {
+    public ResultMessage addUser(UserPO po) throws RemoteException{
         return userDataHelper.addUser(po);
     }
 
     @Override
-    public ResultMessage deleteUser(int id) throws RemoteException,Exception{
+    public ResultMessage deleteUser(int id) throws RemoteException{
         return userDataHelper.deleteUser(id);
     }
 
     @Override
-    public ResultMessage modifyUser(UserPO po) throws RemoteException,Exception{
+    public ResultMessage modifyUser(UserPO po) throws RemoteException{
         return userDataHelper.modifyUser(po);
     }
 
     @Override
-    public ResultMessage login(String accountName, String pwd) throws RemoteException,Exception {
+    public ResultMessage login(String accountName, String pwd) throws RemoteException{
 
         userPO=userDataHelper.getUserData(accountName);
         if(userPO!=null&&pwd.equals(userPO.getPassword())){
@@ -80,13 +80,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public ResultMessage signup(UserPO po) throws RemoteException,Exception{
+    public ResultMessage signup(UserPO po) throws RemoteException{
 
         return userDataHelper.addUser(po);
     }
 
     @Override
-    public ResultMessage logout(String accountName) throws RemoteException, Exception {
+    public ResultMessage logout(String accountName) throws RemoteException{
         userPO=userDataHelper.getUserData(accountName);
         if(userPO==null) return ResultMessage.notexist;
         int isOn=userDataHelper.checkIsOn(userPO.getUserID());

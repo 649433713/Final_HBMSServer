@@ -20,7 +20,7 @@ public class PromotionDataMysqlHelper implements PromotionDataHelper{
 	}
 
 	@Override
-	public Map<Integer, PromotionPO> getPromotionList(PromotionFilter promotionFilter)throws Exception {
+	public Map<Integer, PromotionPO> getPromotionList(PromotionFilter promotionFilter){
 		SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
 		StringBuffer stringBuffer = new StringBuffer("select * from promotion where 1=1");
 		//transfer filter to stringBuffer
@@ -73,7 +73,7 @@ public class PromotionDataMysqlHelper implements PromotionDataHelper{
 	}
 
 	@Override
-	public ResultMessage addPromotion(PromotionPO po) throws Exception{
+	public ResultMessage addPromotion(PromotionPO po){
 
 
         String sql = ""+
@@ -103,7 +103,7 @@ public class PromotionDataMysqlHelper implements PromotionDataHelper{
 	}
 
 	@Override
-	public ResultMessage deletePromotion(int id) throws Exception {
+	public ResultMessage deletePromotion(int id){
 		String sql="" + " Select * from promotion" + " where promotionID =? ";
 		String sql2 = "" + "delete from promotion where promotionID = ?";
 		try{
@@ -125,7 +125,7 @@ public class PromotionDataMysqlHelper implements PromotionDataHelper{
 	}
 
 	@Override
-	public ResultMessage updatePromotion(PromotionPO po) throws Exception{
+	public ResultMessage updatePromotion(PromotionPO po){
 		String sql;
 		if(po.getRegion()!=0){
 			sql=" "+
