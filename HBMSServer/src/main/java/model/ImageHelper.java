@@ -20,7 +20,7 @@ public class ImageHelper {
     }
 
     public File getUserDir(int userID) throws Exception{
-        String rootPath=getProjectPath()+"/res/user/";
+        String rootPath="/res/user/";
         File userFolder=new File(rootPath+userID);
         return userFolder;
     }
@@ -32,7 +32,7 @@ public class ImageHelper {
     }
 
     public File getHotelDir(int hotelID) throws Exception{
-        String rootPath=getProjectPath()+"/res/hotel/";
+        String rootPath="/res/hotel/";
         File hotelFolder=new File(rootPath+hotelID);
         return hotelFolder;
     }

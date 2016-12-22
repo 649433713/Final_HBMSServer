@@ -5,8 +5,6 @@ import po.UserPO;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 
 /**
  * Created by alex on 16-11-6.

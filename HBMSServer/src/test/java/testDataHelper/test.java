@@ -125,7 +125,7 @@ public class test {
 			e.printStackTrace();
 		}*/
 		
-		RoomDao roomDao = new RoomDaoImpl();
+		/*RoomDao roomDao = new RoomDaoImpl();
 		try {
 			Map<String, RoomInfoPO> map = roomDao.getRoomList(119, new Date());
 			for (RoomInfoPO roomInfoPO : map.values()) {
@@ -135,7 +135,7 @@ public class test {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		*/
 		/*OrderDao orderDao = new OrderDaoImpl();
 		try {
 			for (AppealPO orderPO : orderDao.getAppealOrderList(8).values()) {
@@ -162,5 +162,13 @@ public class test {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
+		CreditDao creditDao = new CreditDaoImpl();
+		try {
+			System.out.println(creditDao.getCreditValue(1));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 }
