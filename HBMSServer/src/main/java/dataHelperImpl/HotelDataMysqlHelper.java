@@ -451,7 +451,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 				path1= imageHelper.getHotelDir(hotelID).getPath()+"/picture1.jpg";
 				imageHelper.saveImage(images.get(0), path1);
 			}
-			if (images.get(1)!=null) {
+		/*	if (images.get(1)!=null) {
 				path2= imageHelper.getHotelDir(hotelID).getPath()+"/picture2.jpg";	
 				imageHelper.saveImage(images.get(1), path2);
 			}
@@ -459,7 +459,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 				path3= imageHelper.getHotelDir(hotelID).getPath()+"/picture3.jpg";	
 				imageHelper.saveImage(images.get(2), path3);
 			}
-			} catch (Exception e) {
+		*/	} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
