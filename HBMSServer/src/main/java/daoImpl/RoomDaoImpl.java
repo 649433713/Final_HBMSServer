@@ -98,14 +98,7 @@ public class RoomDaoImpl implements RoomDao {
 	public ResultMessage modifyRoomState(int roomInfoID, RoomStateMessage room_state)
 			throws RemoteException {
 		
-		RoomInfoPO copy = null;
-		for (RoomInfoPO roomInfoPO : map.values()) {
-			if (roomInfoID==roomInfoPO.getRoomInfoID()) {
-				copy = roomInfoPO;
-				break;
-			}
-		}
-		
+		RoomInfoPO copy = roomDataHelper.getRoomInfo(roomInfoID);
 		
 		copy.setRoomState(room_state);
 		

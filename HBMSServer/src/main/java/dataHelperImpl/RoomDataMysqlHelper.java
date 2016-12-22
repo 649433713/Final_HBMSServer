@@ -249,5 +249,35 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 		return ResultMessage.success;
 	}
 
+	@Override
+	public RoomInfoPO getRoomInfo(int roominfoID) {
+		String sql = "select * from roominfo where roomInfoID =?";
+		
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1,roominfoID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			RoomInfoPO roomInfoPO = null;
+			if(resultSet.next()) {
+
+				roomInfoPO = new RoomInfoPO(resultSet.getInt("roomInfoID"), resultSet.getInt("hotelID"),
+						resultSet.getString("roomID"), resultSet.getString("roomType"), resultSet.getInt("defaultPrice"),
+						RoomStateMessage.values()[resultSet.getInt("roomState")], resultSet.getTimestamp("detailedInfo1"),
+						resultSet.getTimestamp("detailedInfo2"));
+
+			}
+			return roomInfoPO;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+
+		
+	
+	}
+
 	
 }

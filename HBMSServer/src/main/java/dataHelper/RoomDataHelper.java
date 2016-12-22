@@ -25,5 +25,5 @@ public interface RoomDataHelper {
 
 	public ResultMessage modifyPriceByDay(int roomInfoID,int price,Date date);
 
-	
+	public RoomInfoPO getRoomInfo(int roominfoID);
 }
