@@ -1,7 +1,5 @@
 package model;
 
-import message.ResultMessage;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -16,11 +14,12 @@ public class ImageHelper {
     public String makeUserDir(int userID)throws Exception{
         File userFolder=getUserDir(userID);
         userFolder.mkdirs();
-        return userFolder.getPath();
+        System.out.println(userFolder.getAbsolutePath());
+        return userFolder.getPath().replace('\\', '/');
     }
 
     public File getUserDir(int userID) throws Exception{
-        String rootPath="/res/user/";
+        String rootPath="res/user/";
         File userFolder=new File(rootPath+userID);
         return userFolder;
     }
@@ -28,11 +27,11 @@ public class ImageHelper {
     public String makeHotelDir(int hotelID)throws Exception{
         File hotelFolder=getHotelDir(hotelID);
         hotelFolder.mkdirs();
-        return hotelFolder.getPath();
+        return hotelFolder.getPath().replace('\\', '/');
     }
 
     public File getHotelDir(int hotelID) throws Exception{
-        String rootPath="/res/hotel/";
+        String rootPath="res/hotel/";
         File hotelFolder=new File(rootPath+hotelID);
         return hotelFolder;
     }

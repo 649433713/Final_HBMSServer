@@ -448,7 +448,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 			imageHelper.deldir(imageHelper.getHotelDir(hotelID));
 			imageHelper.makeHotelDir(hotelID);
 			if (images.get(0)!=null) {
-				path1= imageHelper.getHotelDir(hotelID).getPath()+"/picture1.jpg";
+				path1= imageHelper.getHotelDir(hotelID).getPath().replace('\\','/')+"/picture1.jpg";
 				imageHelper.saveImage(images.get(0), path1);
 			}
 		/*	if (images.get(1)!=null) {
