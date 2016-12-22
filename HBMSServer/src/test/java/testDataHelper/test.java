@@ -125,13 +125,16 @@ public class test {
 			e.printStackTrace();
 		}*/
 		
-		/*RoomDao roomDao = new RoomDaoImpl();
+		RoomDao roomDao = new RoomDaoImpl();
 		try {
-			roomDao.modifyRoomStateByDay(9, RoomStateMessage.Blank, new Date());
+			Map<String, RoomInfoPO> map = roomDao.getRoomList(119, new Date());
+			for (RoomInfoPO roomInfoPO : map.values()) {
+				System.out.println(roomInfoPO);
+			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		
 		/*OrderDao orderDao = new OrderDaoImpl();
 		try {
@@ -148,7 +151,7 @@ public class test {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		
+		/*
 		UserDao userDao = new UserDaoImpl();
 		try {
 			System.out.println(userDao.login("谢振宇SB", "123456"));
@@ -158,6 +161,6 @@ public class test {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 }

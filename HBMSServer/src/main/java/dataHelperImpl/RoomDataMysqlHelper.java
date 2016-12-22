@@ -61,9 +61,9 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 			
 			String sql = "select roomType,defaultPrice from roominfo where hotelID =? group by roomType ";
 			String sql2 = "select temp.* from(select roominfo.*  from roomdate inner join "
-					+ "roominfo on roomdate.roomInfoID = roominfo.roomInfoID where roominfo.hotelID =？ and "+dayOff+"=1 order by defaultPrice ) "
+					+ "roominfo on roomdate.roomInfoID = roominfo.roomInfoID where roominfo.hotelID =? and "+dayOff+"=1 order by defaultPrice ) "
 					+ "temp,(select roomType,min(defaultPrice) price from (select roominfo.*  from roomdate inner join "
-					+ "roominfo on roomdate.roomInfoID = roominfo.roomInfoID where roominfo.hotelID =？ and "+dayOff+"=1 order by defaultPrice ) "
+					+ "roominfo on roomdate.roomInfoID = roominfo.roomInfoID where roominfo.hotelID =? and "+dayOff+"=1 order by defaultPrice ) "
 					+ "temp group by roomType) temp2 where temp.roomType = temp2.roomType and temp.defaultPrice = temp2.price group by roomType order by defaultPrice";
 			
 			Map<String, RoomInfoPO> roominfo = new LinkedHashMap<>();
@@ -83,7 +83,7 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 				while (resultSet.next()) {
 
 					roomInfoPO = new RoomInfoPO(resultSet.getInt("roomInfoID"), resultSet.getInt("hotelID"),
-							resultSet.getString("roomID"), resultSet.getString("roomType"), resultSet.getInt("Price"),
+							resultSet.getString("roomID"), resultSet.getString("roomType"), resultSet.getInt("defaultPrice"),
 							null,null,null);
 				
 					roominfo.put(roomInfoPO.getRoomType(), roomInfoPO);
