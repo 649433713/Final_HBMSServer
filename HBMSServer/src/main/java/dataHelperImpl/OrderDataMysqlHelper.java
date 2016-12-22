@@ -113,7 +113,7 @@ public class OrderDataMysqlHelper implements OrderDataHelper {
 		String sql = null;
 		switch (orderState) {
 		case Executed:
-			 sql = "update orderlist set chechinTime = now(),orderState = 1 where orderID = "+orderID;
+			 sql = "update orderlist set checkinTime = now(),orderState = 1 where orderID = "+orderID;
 			break;
 		case Abnormal:
 			 sql = "update orderlist set orderState = 2 where orderID = "+orderID;
