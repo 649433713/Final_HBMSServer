@@ -36,7 +36,7 @@ public class HotelDaoImpl implements HotelDao{
 	}
 	public HotelDaoImpl() {
 		if (map==null) {
-			dataFactory = new DataFactoryImpl();
+			dataFactory = DataFactoryImpl.getDataFactory();
 			hotelDataHelper = dataFactory.getHotelDataHelper();
 	
 		}

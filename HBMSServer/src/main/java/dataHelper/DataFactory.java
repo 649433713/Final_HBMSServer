@@ -17,4 +17,5 @@ public interface DataFactory {
 	public CreditDataHelper getCreditDataHelper();
 
 	public PromotionDataHelper getPromotionDataHelper();
+	
 }

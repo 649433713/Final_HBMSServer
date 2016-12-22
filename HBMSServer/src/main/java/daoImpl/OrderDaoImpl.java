@@ -38,7 +38,7 @@ public class OrderDaoImpl implements OrderDao
 	}
 	public OrderDaoImpl() {
 		if (map==null) {
-			dataFactory = new DataFactoryImpl();
+			dataFactory = DataFactoryImpl.getDataFactory();
 			orderDataHelper = dataFactory.getOrderDataHelper();
 			
 		}

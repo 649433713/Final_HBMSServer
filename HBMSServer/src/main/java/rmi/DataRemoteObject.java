@@ -35,12 +35,18 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 
 	protected DataRemoteObject() throws RemoteException {
 		super();
-		hotelDao = new HotelDaoImpl();
+		/*hotelDao = new HotelDaoImpl();
 		userDao=new UserDaoImpl();
 		creditDao = new CreditDaoImpl();
 		orderDao = new OrderDaoImpl();
 		roomDao = new RoomDaoImpl();
-		promotionDao=new PromotionDaoImpl();
+		promotionDao=new PromotionDaoImpl();*/
+		hotelDao = HotelDaoImpl.getInstance();
+		userDao = UserDaoImpl.getInstance();
+		creditDao = CreditDaoImpl.getInstance();
+		orderDao = OrderDaoImpl.getInstance();
+		roomDao = RoomDaoImpl.getInstance();
+		promotionDao = PromotionDaoImpl.getInstance();
 		
 	}
 

@@ -14,17 +14,15 @@ import java.sql.Connection;
  */
 public class UserDaoImpl implements UserDao {
     Connection connection;
-    private static UserPO userPO;
+    private UserPO userPO;
     private static UserDaoImpl userDaoImpl;
     private DataFactory dataFactory;
     private UserDataHelper userDataHelper;
 
     public UserDaoImpl() {
-        if(userPO==null){
-            dataFactory=new DataFactoryImpl();
+            dataFactory=DataFactoryImpl.getDataFactory();
             userDataHelper=dataFactory.getUserDataHelper();
             connection= DBUtil.getConnection();
-        }
     }
 
     public static UserDaoImpl getInstance(){

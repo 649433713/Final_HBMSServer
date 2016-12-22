@@ -26,10 +26,8 @@ public class CreditDaoImpl implements CreditDao{
 
 
 	public CreditDaoImpl() {
-		if(map==null){
-			dataFactory=new DataFactoryImpl();
-			creditDataHelper=dataFactory.getCreditDataHelper();
-		}
+		dataFactory=DataFactoryImpl.getDataFactory();
+		creditDataHelper=dataFactory.getCreditDataHelper();
 	}
 
 	public static CreditDaoImpl getInstance(){

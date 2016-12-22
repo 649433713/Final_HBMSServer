@@ -8,39 +8,66 @@ import dataHelper.*;
  */
 public class DataFactoryImpl implements DataFactory{
 
+	HotelDataHelper hotelDataHelper;
+	UserDataHelper userDataHelper;
+	RoomDataHelper roomDataHelper;
+	OrderDataHelper orderDataHelper;
+	CreditDataHelper creditDataHelper;
+	PromotionDataHelper promotionDataHelper;
+	static DataFactoryImpl dataFactoryImpl;
+	
+	public DataFactoryImpl() {
+		hotelDataHelper = new HotelDataMysqlHelper();
+		userDataHelper=new UserDataMysqlHelper();
+		roomDataHelper = new RoomDataMysqlHelper();
+		orderDataHelper = new OrderDataMysqlHelper();
+		creditDataHelper=new CreditDataMysqlHelper();
+		promotionDataHelper=new PromotionDataMysqlHelper();
+		
+	}
+	
 	public HotelDataHelper getHotelDataHelper() {
-		HotelDataHelper hotelDataHelper = new HotelDataMysqlHelper();
+		
 		return hotelDataHelper;
 	}
 
 	public UserDataHelper getUserDataHelper(){
-		UserDataHelper userDataHelper=new UserDataMysqlHelper();
+
 		return userDataHelper;
 	}
 
 	@Override
 	public RoomDataHelper getRoomDataHelper() {
-		RoomDataHelper roomDataHelper = new RoomDataMysqlHelper();
+		
 		return roomDataHelper;
 	}
 
 
 	@Override
 	public OrderDataHelper getOrderDataHelper() {
-		OrderDataHelper orderDataHelper = new OrderDataMysqlHelper();
+
 		return orderDataHelper;
 	}
 
 	@Override
 	public CreditDataHelper getCreditDataHelper() {
-		CreditDataHelper creditDataHelper=new CreditDataMysqlHelper();
+
 		return creditDataHelper;
 	}
 
 	@Override
 	public PromotionDataHelper getPromotionDataHelper() {
-		PromotionDataHelper promotionDataHelper=new PromotionDataMysqlHelper();
+
 		return promotionDataHelper;
+	}
+
+	public static DataFactory getDataFactory() {
+		
+		if (dataFactoryImpl==null) {
+			dataFactoryImpl = new DataFactoryImpl();
+		}
+		 
+		return dataFactoryImpl;
 	}
 
 

@@ -37,7 +37,7 @@ public class RoomDaoImpl implements RoomDao {
 
 	public RoomDaoImpl() {
 		if (map == null) {
-			dataFactory = new DataFactoryImpl();
+			dataFactory = DataFactoryImpl.getDataFactory();
 			roomDataHelper = dataFactory.getRoomDataHelper();
 			map = null;
 		}

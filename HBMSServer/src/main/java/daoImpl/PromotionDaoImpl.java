@@ -22,7 +22,7 @@ public class PromotionDaoImpl implements PromotionDao{
 
 	public PromotionDaoImpl() {
 		if(promotionPO==null){
-			dataFactory=new DataFactoryImpl();
+			dataFactory=DataFactoryImpl.getDataFactory();
 			promotionDataHelper=dataFactory.getPromotionDataHelper();
 			connection= DBUtil.getConnection();
 		}
