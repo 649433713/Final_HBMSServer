@@ -63,21 +63,24 @@ public class OrderDataMysqlHelper implements OrderDataHelper {
 				sql.append(" and orderState ="+orderState.ordinal());
 			}
 		}
-		switch (orderState) {
-		case Unexecuted:
-			sql.append(" order by executeDDL");
-			break;
-		case Executed:
-		case Abnormal:
-			sql.append(" order by generateTime desc");
-			break;
-		case Cancelled:
-			sql.append(" order by cancelTime desc");
-			break;
-		default:
-			break;
+		if (orderState!=null) {
+
+			switch (orderState) {
+			case Unexecuted:
+				sql.append(" order by executeDDL");
+				break;
+			case Executed:
+			case Abnormal:
+				sql.append(" order by generateTime desc");
+				break;
+			case Cancelled:
+				sql.append(" order by cancelTime desc");
+				break;
+			default:
+				break;
+			}
+				
 		}
-		
 		
 		
 	
