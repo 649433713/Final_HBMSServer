@@ -330,7 +330,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
                 preparedStatement.setString(4,userPO.getPassword());
                 preparedStatement.setString(5,userPO.getName());
                 preparedStatement.setString(6,userPO.getContact());
-                String portraitPath=imageHelper.makeUserDir(userID)+"/portrait"+userID+".jpg";
+                String portraitPath=imageHelper.getUserDir(userID).getPath().replace('\\','/')+"/portrait"+userID+".jpg";
                 preparedStatement.setString(7,portraitPath);
                 preparedStatement.setLong(8,userPO.getCreditValue());
                 preparedStatement.setInt(9,userPO.getMemberType().ordinal());
