@@ -42,11 +42,11 @@ public class PromotionDataMysqlHelper implements PromotionDataHelper{
 
 				}else{
 					if(map.get("relation").equals("!=")){
-
-					}else{
 						stringBuffer.append(" and NOT "+map.get("name")+" "+"="+" "+map.get("value"));
+					}else{
+						stringBuffer.append(" and "+map.get("name")+" "+map.get("relation")+" "+map.get("value"));
 					}
-					stringBuffer.append(" and "+map.get("name")+" "+map.get("relation")+" "+map.get("value"));
+
 				}
 			}
 		}
